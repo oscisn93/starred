@@ -1,13 +1,11 @@
 import './App.css'
+import Login from './Components/Login'
 
 function App() {
 
   return (
     <div>
-      <h1>Starred</h1>
-      <form action="#">
-        <input type="text" />
-      </form>
+      <Login />
     </div>
   )
 }
