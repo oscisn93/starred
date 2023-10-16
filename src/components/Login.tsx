@@ -1,6 +1,18 @@
+import {
+  signInWithEmailAndPassword
+} from "firebase/auth";
+import { }
 import './Login.css';
 
+
+async function handleLogin(email, password) {
+  const auth = getAuth();
+  const userCredential = await signInWithEmailAndPassword(auth, email, password);
+  return userCredential.user;
+};
+
 function Login() {
+  
   return (
     <div>
       <div className='header'>
@@ -10,7 +22,7 @@ function Login() {
         <h2>Login</h2>
         <input type="email" placeholder='Email' />
         <input type="password" placeholder='Password' />
-        <button>Submit</button>
+        <button onSubmit={handleLogin}>Submit</button>
       </div>
     </div>
   )
