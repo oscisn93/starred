@@ -1,0 +1,163 @@
+
+/* Set a default font size and line height */
+html {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Add some padding to the body */
+body {
+  padding: 20px;
+}
+
+.row-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
+
+/* Center the main content */
+.main-content {
+  text-align: center;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.component {
+  margin-bottom: 20px; /*Add space between components */
+}
+
+.component h1{
+  justify-content: left;
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+/* Container for the task list */
+.task-list-container {
+  width: 686px;
+  height: 221px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+}
+
+/* Individual task items */
+.task-item {
+  width: 191px;
+  height: 166px;
+  flex-shrink: 0;
+  scroll-snap-align: center;
+  background-color: white;
+  margin-left: 10px;
+  margin-right: 20px;
+  margin-top: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.122);
+  border-radius: 20px;
+}
+
+/* Removes the margin from the last task item */
+.task-item:last-child {
+  margin-right: 0;
+}
+
+/* Container for guardians */
+.guardians-container {
+  width: 270px;
+  height: 136px;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content:space-between;
+}
+
+/* Individual guardian items */
+.guardian-item {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #ccc;
+  margin-bottom: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.039);
+}
+
+.guardian-item h4{
+  text-align: center;
+}
+
+.task-in-progress-container {
+  width: 686px;
+  height: 221px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  margin-top: 20px;
+}
+
+.task-item-in-progress {
+  width: 191px;
+  height: 166px;
+  flex-shrink: 0;
+  scroll-snap-align: center;
+  background-color: white;
+  margin-left: 10px;
+  margin-right: 20px;
+  margin-top: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.122);
+  border-radius: 20px;
+}
+
+/* Removes the margin from the last task item */
+.task-item-in-progress:last-child {
+  margin-right: 0;
+}
+
+/* Container for upcoming tasks */
+.upcoming-tasks-container {
+  width: 263px;
+  height: 262px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+/* Upcoming task items */
+.upcoming-task-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.137);
+  margin-bottom: 10px;
+}
+
+/* Upcoming task title */
+.upcoming-task-title {
+  font-weight: bold;
+}
+
+/* Upcoming task description */
+.upcoming-task-description {
+  margin-right: 10px;
+}
+
+/* See more link */
+.see-more-link {
+  color: rgb(232, 135, 8);
+  text-decoration: underline;
+}
+
+/* Responsive layout for small screens */
+@media (max-width: 600px) {
+
+  /* Stack components vertically */
+  .component {
+    margin-bottom: 40px;
+  }
+}
