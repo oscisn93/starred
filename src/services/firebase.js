@@ -34,7 +34,7 @@ export function signOut() {
   return signOut(auth).then(()=>console.log('success')).catch((err)=>console.error(err));
 };
 
-fucntion reauthenticate(password) {
+function reauthenticate(password) {
   const user = auth.currentUser;
   const cred = auth.EmailAuthProvider.credential(
     user.email,
@@ -58,5 +58,5 @@ export function changePassword(oldPassword, newPassword) {
       })
       .catch(err => reject(err));
   });
-}
+};
 
