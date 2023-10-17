@@ -1,31 +1,22 @@
-import React from 'react';
- import './index.css';
- import bannerImage from '../../assets/bannerImage.jpg';
+import './index.css'
 
 const Home = () => {
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      console.log('Enter Key Pressed');
-    }
-  };
 
     return(
       <div className='main-content'>
-        <div className="search-bar">
-        <input
-          type="text"
-          placeholder="Search..."
-          onKeyPress={handleKeyPress}
-        />
+        <h1>Hello from the home page</h1>
+
+        <div className='component'>
+          <div>placeholder for wesley</div>
         </div>
 
-        <div className='banner'>
-        <img src={bannerImage} alt="Banner Image" className="banner-image" />
-        <div className="banner-text">
-          <h1>Your Banner Text</h1>
-          <p>Some additional banner text or description.</p>
+        <div className='component'>
+          <div>placeholder for wesley</div>
         </div>
-      </div>
+
+        <div className='component'>
+          <div>placeholder for wesley</div>
+        </div>
 
         <div className='row-container'>
           <div className='component'>
