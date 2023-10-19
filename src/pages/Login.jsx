@@ -20,7 +20,7 @@ function Login() {
     event.preventDefault();
     signIn(email, password).then((user) => {
       console.log(user);
-      return navigate('/home');
+      return navigate("/home");
     });
   }
 

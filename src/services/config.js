@@ -1,8 +1,8 @@
 export const firebaseConfig = {
-  apiKey: "AIzaSyDLpVbF_twkL0HY1oUIcoAWuaDvXRbL7Y4",
-  authDomain: "starred-40b66.firebaseapp.com",
-  projectId: "starred-40b66",
-  storageBucket: "starred-40b66.appspot.com",
-  messagingSenderId: "486913117715",
-  appId: "1:486913117715:web:27aafe27fb530ef5ccb9e6"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN_URL,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET_URL,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
