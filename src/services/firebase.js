@@ -8,30 +8,26 @@ const auth = getAuth(app);
 
 export async function createAccount(email, password) {
   try {
-    const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
-    const user = userCredentials.user;
-    console.table(user);
-  } catch (error) {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.error('Error ', errorCode, ':', errorMessage);
+    await createUserWithEmailAndPassword(auth, email, password);
+
+  } catch (err) {
+    console.error(err.message);
+    return null;
   }
 };
 
 export async function signIn(email, password) {
   try {
-    const data = await signInWithEmailAndPassword(auth, email, password);
-    console.log(data);
+    await signInWithEmailAndPassword(auth, email, password);
   } catch (err) {
-    return console.error(err);
+    console.error(err);
   }
 };
 
 export async function signOutUser() {
   try {
     await signOut(auth);
-    return console.log('success');
   } catch (err) {
-    return console.error(err);
+    console.error(err);
   }
 };
