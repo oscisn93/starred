@@ -4,7 +4,7 @@ export interface UserData {
     email: string;
     firstName: string;
     lastName: string;
-}
+};
 
 type Role = 'guardians' | 'dependents' | 'role-models';
 
@@ -12,7 +12,7 @@ interface Resource {
     userID: string;
     creatorID: string;
     guardianID: string;
-}
+};
 
 export interface TaskData extends Resource {
     title: string;
@@ -21,22 +21,21 @@ export interface TaskData extends Resource {
     goalID: string;
     dueDate: Date | null;
     points: number;
-}
+};
 
 export interface Task extends TaskData {
     taskID: string;
-}
-
+};
 
 export interface GoalData extends Resource {
     title: string;
     description: string | null;
-}
+};
 
 export interface Goal extends GoalData {
     goalID: string;
     tasks: Task[];
-}
+};
 
 export interface RewardData extends Resource {
     name: string;
@@ -46,8 +45,8 @@ export interface RewardData extends Resource {
     url: string | null;
     approved: boolean;
     earned: boolean;
-}
+};
 
 export interface Reward extends RewardData {
     rewardID: string;
-}
+};

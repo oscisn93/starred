@@ -14,14 +14,25 @@ import {
   Timestamp,
 } from "firebase/firestore";
 import { firebaseConfig } from "./config";
-import { Role, UserData, TaskData, Task, Goal, Reward } from "./types";
+import {
+  Role,
+  UserData,
+  TaskData,
+  Task,
+  Goal,
+  Reward,
+  Resource,
+  GoalData,
+  RewardData,
+} from "./types";
 
 const app: FirebaseApp = initializeApp(firebaseConfig);
-const auth: Auth = getAuth(app);
-const db = getFirestore(app);
+export const auth: Auth = getAuth(app);
+export const db = getFirestore(app);
 
 // utility functions
 function logError(err: unknown): void {
+  // handles proper error objects and strings
   if (err instanceof Error) {
     console.error(err.message);
   } else {
@@ -30,7 +41,6 @@ function logError(err: unknown): void {
 }
 
 //TODO: implement custom role-based permissions for tasks, goals, and rewards
-//
 //
 // function verifyPermission(userID: string, role: Role, resource: Task | Goal | Reward): boolean {
 //   switch (role) {
@@ -61,6 +71,10 @@ export async function createGuardianAccount(
       email: userData.email,
       first: userData.firstName,
       last: userData.lastName,
+      dependents: [],
+      tasks: [],
+      goals: [],
+      rewards: [],
     };
 
     await setDoc(doc(db, "guardian", user.uid), userRecord);
@@ -83,12 +97,14 @@ export async function createDependentAccount(
     const user = userCredential.user;
     await setDoc(doc(db, "dependent", user.uid), {
       email: userData.email,
-      first: userData.firstName,
-      last: userData.lastName,
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      points: 0,
       tasks: [],
       goals: [],
+      rewards: [],
       guardianID: guardianID,
-      role_models: [],
+      roleModels: [],
     });
   } catch (err) {
     logError(err);
@@ -119,9 +135,80 @@ export async function createRoleModelAccount(
   }
 }
 
+export async function signIn(email: string, password: string) {
+  try {
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+  } catch (err) {
+    logError(err);
+  }
+}
+
+export async function signOutUser() {
+  try {
+    await signOut(auth);
+  } catch (err) {
+    logError(err);
+  }
+}
+
+
+
 // Tasks serrvices
 
-export async function getTasks(userID: string) {
+/**
+ * Determines if a user is authorized to access a resource, a resource is
+ * a task, goal, or reward.
+ */
+async function isAuthorized(
+  userID: string,
+  resource: Task | Goal | Reward,
+  resourceID: string
+): Promise<boolean> {
+  // make sure user is logged in
+  const user = auth.currentUser;
+  if (!user) {
+    throw new Error("401: Not Authenticated");
+  }
+  // if user is the creator, guardian, or dependent
+  // whose task it is, return true
+  if (
+    resource.userID === userID ||
+    resource.creatorID === user.uid ||
+    resource.guardianID === user.uid
+  ) {
+    return true;
+  } else {
+  }
+
+  // otherqise, return false
+  return false;
+}
+
+export async function getTasks(userID: string): Promise<Array<Task>> {
+  try {
+    const user = auth.currentUser;
+    if (!user) {
+      throw new Error("401: Not Authenticated");
+    }
+    const userRef = doc(db, "users", userID);
+    const userSnap = await getDoc(userRef);
+    if (userSnap.exists()) {
+      const tasks = userSnap.data().tasks;
+      return tasks;
+    } else {
+      console.log("No such document!");
+    }
+  } catch (err) {
+    logError(err);
+  }
+  return [];
+}
+
+export async function getTask(userID: string) {
   try {
     const docRef = doc(db, "users", userID);
     const docSnap = await getDoc(docRef);
@@ -135,24 +222,10 @@ export async function getTasks(userID: string) {
   }
 }
 
-export async function getTask(userID: string) {
+export async function addTask(userID: string, task: TaskData) {
   try {
     const docRef = doc(db, "users", userID);
-    const docSnap = await docRef.get();
-    if (docSnap.exists()) {
-      return docSnap.data().tasks;
-    } else {
-      console.log("No such document!");
-    }
-  } catch (err) {
-    logError(err);
-  }
-}
-
-export async function addTask(userID: string, task) {
-  try {
-    const docRef = doc(db, "users", userID);
-    const docSnap = await docRef.get();
+    const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       const tasks = docSnap.data().tasks;
       tasks.push(task);
@@ -168,7 +241,7 @@ export async function addTask(userID: string, task) {
 export async function updateTask(userID: string, taskID: string, task: Task) {
   try {
     const docRef = doc(db, "users", userID);
-    const docSnap = await docRef.get();
+    const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       const tasks = docSnap.data().tasks;
       tasks[taskID] = task;
@@ -177,14 +250,14 @@ export async function updateTask(userID: string, taskID: string, task: Task) {
       console.log("Not a valid user ID");
     }
   } catch (err) {
-    console.error(err.message);
+    logError(err);
   }
 }
 
-export async function deleteTask(userID, taskID) {
+export async function deleteTask(userID: string, taskID: string) {
   try {
     const docRef = doc(db, "users", userID);
-    const docSnap = await docRef.get();
+    const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       const tasks = docSnap.data().tasks;
       tasks.splice(taskID, 1);
@@ -193,7 +266,7 @@ export async function deleteTask(userID, taskID) {
       console.log("Not a valid user ID");
     }
   } catch (err) {
-    console.error(err.message);
+    logError(err);
   }
 }
 
@@ -202,7 +275,7 @@ export async function deleteTask(userID, taskID) {
 export async function getGoals(userID: string) {
   try {
     const docRef = doc(db, "users", userID);
-    const docSnap = await docRef.get();
+    const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       return docSnap.data().goals;
     } else {
@@ -216,7 +289,7 @@ export async function getGoals(userID: string) {
 export async function getGoal(userID: string) {
   try {
     const docRef = doc(db, "users", userID);
-    const docSnap = await docRef.get();
+    const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       return docSnap.data().goals;
     } else {
@@ -227,10 +300,10 @@ export async function getGoal(userID: string) {
   }
 }
 
-async function addGoal(userID: string, goal) {
+async function addGoal(userID: string, goal: GoalData) {
   try {
     const docRef = doc(db, "users", userID);
-    const docSnap = await docRef.get();
+    const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       const goals = docSnap.data().goals;
       goals.push(goal);
@@ -243,10 +316,10 @@ async function addGoal(userID: string, goal) {
   }
 }
 
-async function updateGoal(userID: string, goalID: string, goal) {
+async function updateGoal(userID: string, goalID: string, goal: GoalData) {
   try {
     const docRef = doc(db, "users", userID);
-    const docSnap = await docRef.get();
+    const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       const goals = docSnap.data().goals;
       goals[goalID] = goal;
@@ -259,10 +332,10 @@ async function updateGoal(userID: string, goalID: string, goal) {
   }
 }
 
-async function deleteGoal(userID, goalID) {
+async function deleteGoal(goalID: string) {
   try {
-    const docRef = doc(db, "users", userID);
-    const docSnap = await docRef.get();
+    const docRef = doc(db, "users", goalID);
+    const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       const goals = docSnap.data().goals;
       goals.splice(goalID, 1);
@@ -280,7 +353,7 @@ async function deleteGoal(userID, goalID) {
 async function getRewards(userID: string) {
   try {
     const docRef = doc(db, "users", userID);
-    const docSnap = await docRef.get();
+    const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       return docSnap.data().rewards;
     } else {
@@ -294,7 +367,7 @@ async function getRewards(userID: string) {
 async function getReward(userID: string) {
   try {
     const docRef = doc(db, "users", userID);
-    const docSnap = await docRef.get();
+    const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       return docSnap.data().rewards;
     } else {
@@ -305,10 +378,10 @@ async function getReward(userID: string) {
   }
 }
 
-async function addReward(userID: string, reward) {
+async function addReward(userID: string, reward: RewardData) {
   try {
     const docRef = doc(db, "users", userID);
-    const docSnap = await docRef.get();
+    const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       const rewards = docSnap.data().rewards;
       rewards.push(reward);
@@ -321,10 +394,10 @@ async function addReward(userID: string, reward) {
   }
 }
 
-async function updateReward(userID: string, rewardID: string, reward) {
+async function updateReward(userID: string, rewardID: string, reward: RewardData) {
   try {
     const docRef = doc(db, "users", userID);
-    const docSnap = await docRef.get();
+    const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       const rewards = docSnap.data().rewards;
       rewards[rewardID] = reward;
@@ -337,10 +410,10 @@ async function updateReward(userID: string, rewardID: string, reward) {
   }
 }
 
-async function deleteReward(userID, rewardID) {
+async function deleteReward(rewardID: string) {
   try {
-    const docRef = doc(db, "users", userID);
-    const docSnap = await docRef.get();
+    const docRef = doc(db, "users", rewardID);
+    const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       const rewards = docSnap.data().rewards;
       rewards.splice(rewardID, 1);
@@ -353,49 +426,49 @@ async function deleteReward(userID, rewardID) {
   }
 }
 
-// wishlist service
-async function getWishlist(userID: string) {
-  try {
-    const docRef = doc(db, "users", userID);
-    const docSnap = await docRef.get();
-    if (docSnap.exists()) {
-      return docSnap.data().wishlist;
-    } else {
-      console.log("No such document!");
-    }
-  } catch (err) {
-    logError(err);
-  }
-}
+// // wishlist service
+// async function getWishlist(userID: string) {
+//   try {
+//     const docRef = doc(db, "users", userID);
+//     const docSnap = await getDoc(docRef);
+//     if (docSnap.exists()) {
+//       return docSnap.data().wishlist;
+//     } else {
+//       console.log("No such document!");
+//     }
+//   } catch (err) {
+//     logError(err);
+//   }
+// }
 
-async function addWishlistItem(userID: string, taskID: string) {
-  try {
-    const docRef = doc(db, "users", userID);
-    const docSnap = await docRef.get();
-    if (docSnap.exists()) {
-      const wishlist = docSnap.data().wishlist;
-      wishlist.push(item);
-      await setDoc(docRef, { wishlist: wishlist }, { merge: true });
-    } else {
-      console.log("Not a valid user ID");
-    }
-  } catch (err) {
-    logError(err);
-  }
-}
+// async function addWishlistItem(userID: string, rewardID: string) {
+//   try {
+//     const docRef = doc(db, "users", userID);
+//     const docSnap = await getDoc(docRef);
+//     if (docSnap.exists()) {
+//       const wishlist = docSnap.data().wishlist;
+//       wishlist.push();
+//       await setDoc(docRef, { wishlist: wishlist }, { merge: true });
+//     } else {
+//       console.log("Not a valid user ID");
+//     }
+//   } catch (err) {
+//     logError(err);
+//   }
+// }
 
-async function deleteWishlistItem(userID: string, taskID: string) {
-  try {
-    const docRef = doc(db, "users", userID);
-    const docSnap = await docRef.get();
-    if (docSnap.exists()) {
-      const wishlist = docSnap.data().wishlist;
-      wishlist.splice(itemID, 1);
-      await setDoc(docRef, { wishlist: wishlist }, { merge: true });
-    } else {
-      console.log("Not a valid user ID");
-    }
-  } catch (err) {
-    logError(err);
-  }
-}
+// async function deleteWishlistItem(userID: string, taskID: string) {
+//   try {
+//     const docRef = doc(db, "users", userID);
+//     const docSnap = await getDoc(docRef);
+//     if (docSnap.exists()) {
+//       const wishlist = docSnap.data().wishlist;
+//       wishlist.splice(itemID, 1);
+//       await setDoc(docRef, { wishlist: wishlist }, { merge: true });
+//     } else {
+//       console.log("Not a valid user ID");
+//     }
+//   } catch (err) {
+//     logError(err);
+//   }
+// }
