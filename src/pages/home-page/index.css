@@ -33,7 +33,6 @@ body {
   margin-bottom: 10px;
 }
 
-/* Container for the task list */
 .task-list-container {
   width: 686px;
   height: 221px;
@@ -42,9 +41,9 @@ body {
   flex-wrap: nowrap;
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
+  justify-content: space-evenly;
 }
 
-/* Individual task items */
 .task-item {
   width: 191px;
   height: 166px;
@@ -54,16 +53,35 @@ body {
   margin-left: 10px;
   margin-right: 20px;
   margin-top: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.122);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
   border-radius: 20px;
+  position: relative;
 }
 
-/* Removes the margin from the last task item */
 .task-item:last-child {
   margin-right: 0;
 }
 
-/* Container for guardians */
+.task-item h4 {
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  font-size: 14px;
+}
+
+.task-item-image {
+  width: 191px;
+  height: 166px;
+  object-fit: cover;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  border-radius: 50%;
+}
+
 .guardians-container {
   width: 270px;
   height: 136px;
@@ -74,18 +92,25 @@ body {
   justify-content:space-between;
 }
 
-/* Individual guardian items */
 .guardian-item {
   width: 80px;
   height: 80px;
   border-radius: 50%;
   background-color: #ccc;
   margin-bottom: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.039);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
 .guardian-item h4{
   text-align: center;
+  font-size: 14px;
+}
+
+.guardian-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .task-in-progress-container {
@@ -97,6 +122,7 @@ body {
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
   margin-top: 20px;
+  justify-content: space-evenly;
 }
 
 .task-item-in-progress {
@@ -108,16 +134,36 @@ body {
   margin-left: 10px;
   margin-right: 20px;
   margin-top: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.122);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
   border-radius: 20px;
+  position: relative;
 }
 
-/* Removes the margin from the last task item */
 .task-item-in-progress:last-child {
   margin-right: 0;
 }
 
-/* Container for upcoming tasks */
+.task-item-in-progress h4 {
+  text-align: center;
+  position: absolute;
+  bottom: 125px;
+  width: 100%;
+  z-index: 1;
+  font-size: 14px;
+}
+
+.task-item-in-progress-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  border-radius: 50%;
+}
+
 .upcoming-tasks-container {
   width: 263px;
   height: 262px;
@@ -125,7 +171,6 @@ body {
   margin-top: 20px;
 }
 
-/* Upcoming task items */
 .upcoming-task-item {
   display: flex;
   flex-direction: column;
@@ -133,24 +178,40 @@ body {
   justify-content: space-between;
   padding: 10px;
   background-color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.137);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
   margin-bottom: 10px;
+  border-radius: 20px;
+  font-size: 16px;
 }
 
-/* Upcoming task title */
 .upcoming-task-title {
   font-weight: bold;
 }
 
-/* Upcoming task description */
 .upcoming-task-description {
   margin-right: 10px;
 }
 
-/* See more link */
 .see-more-link {
-  color: rgb(232, 135, 8);
+  color: #ffa100;
   text-decoration: underline;
+}
+
+.see-more-link-large {
+  color: #ffa100;
+  font-size: 20px;
+  line-height: 30px;
+  text-decoration: underline;
+  margin-left: 140px;
+  margin-right: 20px;
+}
+
+#progress-title {
+  margin-right: 170px;
+}
+
+#progress-title, .see-more-link-large {
+  display: inline;
 }
 
 /* Responsive layout for small screens */

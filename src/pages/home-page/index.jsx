@@ -3,6 +3,14 @@ import React from "react";
 import { signOutUser } from "../../services/firebase";
 import { useNavigate } from "react-router-dom";
 
+import kidFace2 from "../../assets/kidFace1.png";
+import kidFace3 from "../../assets/kidFace2.png";
+import kidFace4 from "../../assets/kidFace3.png";
+import taskIcon1 from "../../assets/taskIcon1.png";
+import taskIcon2 from "../../assets/taskIcon2.png";
+import taskIcon3 from "../../assets/taskIcon3.png";
+
+
 const Home = () => {
   const navigate = useNavigate();
 
@@ -36,10 +44,15 @@ const Home = () => {
         <div className="component">
           <h1>Tasks</h1>
           <div className="task-list-container">
-            <div className="task-item">Task 1</div>
-            <div className="task-item">Task 2</div>
-            <div className="task-item">Task 3</div>
-            <div className="task-item">Task 4</div>
+            <div className="task-item">
+              <img src={taskIcon1} className="task-item-image"></img>
+            </div>
+            <div className="task-item">
+              <img src={taskIcon2} className="task-item-image"></img>
+            </div>
+            <div className="task-item">
+              <img src={taskIcon3} className="task-item-image"></img>
+            </div>
           </div>
         </div>
 
@@ -47,13 +60,16 @@ const Home = () => {
           <h1>Guardians</h1>
           <div className="guardians-container">
             <div className="guardian-item">
-              <h4>guardian 1</h4>
+              <img src={kidFace2} className="guardian-image"></img>
+              <h4>Mom</h4>
             </div>
             <div className="guardian-item">
-              <h4>guardian 2</h4>
+              <img src={kidFace3} className="guardian-image"></img>
+              <h4>Dad</h4>
             </div>
             <div className="guardian-item">
-              <h4>guardian 3</h4>
+              <img src={kidFace4} className="guardian-image"></img>
+              <h4>Guardian 3</h4>
             </div>
           </div>
         </div>
@@ -61,12 +77,18 @@ const Home = () => {
 
       <div className="row-container">
         <div className="component">
-          <h1>In Progress Tasks</h1>
+          <h1 id="progress-title">In Progress Tasks</h1>
+          <a className="see-more-link-large">See More</a>
           <div className="task-in-progress-container">
-            <div className="task-item-in-progress">In Progress Task 1</div>
-            <div className="task-item-in-progress">In Progress Task 2</div>
-            <div className="task-item-in-progress">In Progress Task 3</div>
-            <div className="task-item-in-progress">In Progress Task 4</div>
+            <div className="task-item-in-progress">
+              <img src={taskIcon1} className="task-item-in-progress-image"></img>
+            </div>
+            <div className="task-item-in-progress">
+              <img src={taskIcon2} className="task-item-in-progress-image"></img>
+            </div>
+            <div className="task-item-in-progress">
+              <img src={taskIcon3} className="task-item-in-progress-image"></img>
+            </div>
           </div>
         </div>
 
@@ -74,12 +96,14 @@ const Home = () => {
           <h1>Upcoming Tasks</h1>
           <div className="upcoming-tasks-container">
             <div className="upcoming-task-item">
-              Upcoming Task 1<div className="upcoming-task-title">Task #1</div>
+              Upcoming Task 1
+              <div className="upcoming-task-title">Fold Clothes</div>
               <div className="upcoming-task-description">Description</div>
               <a className="see-more-link">See More</a>
             </div>
             <div className="upcoming-task-item">
-              Upcoming Task 2<div className="upcoming-task-title">Task #2</div>
+              Upcoming Task 2
+              <div className="upcoming-task-title">Take Trash Out</div>
               <div className="upcoming-task-description">Description</div>
               <a className="see-more-link">See More</a>
             </div>
