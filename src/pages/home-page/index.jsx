@@ -9,6 +9,9 @@ import kidFace4 from "../../assets/kidFace3.png";
 import taskIcon1 from "../../assets/taskIcon1.png";
 import taskIcon2 from "../../assets/taskIcon2.png";
 import taskIcon3 from "../../assets/taskIcon3.png";
+import banner from "../../assets/bannerImage.jpg";
+import childrenBanner from "../../assets/childBannerImage.png";
+import rectangle from "../../assets/rectangle.png";
 
 
 const Home = () => {
@@ -21,24 +24,29 @@ const Home = () => {
 
   return (
     <div className="main-content">
-      <header>
-        <div>
-          <button onClick={handleSignOut}>Sign Out</button>
+
+      <div className="vertical-container">
+        <div className="component">
+          <img className="dashboard-background" src={rectangle}></img>
+          <button onClick={handleSignOut}>Log Out</button>
         </div>
-      </header>
-      <h1>Hello from the home page</h1>
-
-      <div className="component">
-        <div>placeholder for wesley</div>
       </div>
 
-      <div className="component">
-        <div>placeholder for wesley</div>
-      </div>
-
-      <div className="component">
-        <div>placeholder for wesley</div>
-      </div>
+      <div className="row-container">
+        <div className="component">
+          <div className="welcome-container">
+            <img src={banner} className="banner-background"></img>
+            <div className="introduction">
+              <p className="date">October 22, 2023</p>
+              <h3 className="welcome-title">
+                Welcome Back, Child1!
+                <p className="subtitle">Getting tasks done!</p>
+              </h3>
+            </div>
+            <img src={childrenBanner} className="child-banner"></img>
+          </div>
+          </div>
+        </div>
 
       <div className="row-container">
         <div className="component">
@@ -57,7 +65,7 @@ const Home = () => {
         </div>
 
         <div className="component">
-          <h1>Guardians</h1>
+          <h1 id="guardians-title">Guardians</h1>
           <div className="guardians-container">
             <div className="guardian-item">
               <img src={kidFace2} className="guardian-image"></img>

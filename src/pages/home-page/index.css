@@ -5,22 +5,32 @@ html {
   line-height: 1.5;
 }
 
-/* Add some padding to the body */
 body {
   padding: 20px;
+  display: flex;
+  justify-content: center;
 }
 
-.row-container {
-  display: flex;
-  align-items: flex-start;
+.main-content {
+  max-width: 1440px;
+  margin: 0 auto;
   justify-content: space-evenly;
 }
 
-/* Center the main content */
-.main-content {
-  text-align: center;
-  max-width: 1440px;
-  margin: 0 auto;
+.vertical-container {
+  float: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 285px;
+  margin-right: 25px;
+}
+
+.row-container {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-evenly;
 }
 
 .component {
@@ -33,6 +43,81 @@ body {
   margin-bottom: 10px;
 }
 
+.dashboard-background {
+  width: 285px;
+  height: 819px;
+  top: 42px;
+  left: 58px;
+  border-radius: 30px;
+  z-index: -1;
+}
+
+.welcome-container{
+  width: 1015px;
+  height: 252px;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 30px;
+  z-index: 1;
+  color: #F2F2F2;
+}
+
+.banner-background{
+  width: 1035px;
+  height: 252px;
+  border-radius: 30px;
+  position: absolute;
+  z-index: -1;
+}
+
+.introduction{
+  width: 1015px;
+  height: 252px;
+  text-indent: 40px;
+  font-family: Poppins;
+}
+
+.welcome-title{
+  width: 531.72px;
+  height: 58.99px;
+  top: 287px;
+  left: 421px;
+  font-size: 40px;
+  line-height: 60px;
+  font-weight: 400;
+  text-align: left;
+  text-indent: 45px;
+}
+
+.date{
+  font-size: 25px;
+  line-height: 37.5px;
+  font-weight: 400;
+  align-items: center;
+  width: 234.8px;
+  height: 48.64px;
+}
+
+.subtitle{
+  width: 443.27px;
+  height: 33.12px;
+  top: 346px;
+  left: 421.59px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0em;
+  text-align: left;
+  text-indent: 50px;
+}
+
+.child-banner{
+  width: 331.66px;
+  height: 252px;
+}
+
 .task-list-container {
   width: 686px;
   height: 221px;
@@ -42,6 +127,7 @@ body {
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
   justify-content: space-evenly;
+  margin-right: 20px;
 }
 
 .task-item {
@@ -80,6 +166,10 @@ body {
   transform: translate(-50%, -50%);
   z-index: 0;
   border-radius: 50%;
+}
+
+#guardians-title{
+  margin-left: 20px;
 }
 
 .guardians-container {
@@ -123,6 +213,7 @@ body {
   scroll-snap-type: x mandatory;
   margin-top: 20px;
   justify-content: space-evenly;
+  margin-right: 40px;
 }
 
 .task-item-in-progress {
@@ -220,5 +311,11 @@ body {
   /* Stack components vertically */
   .component {
     margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 1335px){
+  .vertical-container {
+      display: none;      /* will work on changing this later*/
   }
 }
