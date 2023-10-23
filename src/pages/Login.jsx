@@ -37,7 +37,12 @@ function Login() {
           placeholder="Password"
           onChange={handlePassword}
         />
-        <button onClick={handleSubmit}>Submit</button>
+        <div className="submit-btn">
+          <button onClick={handleSubmit}>Login</button>
+        </div>
+        <div className="register-btn">
+          <button onClick={() => navigate("/register")}>Register</button>
+        </div>
       </div>
     </div>
   );
