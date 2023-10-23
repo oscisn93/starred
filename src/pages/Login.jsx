@@ -41,7 +41,8 @@ function Login() {
           <button onClick={handleSubmit}>Login</button>
         </div>
         <div className="register-btn">
-          <button onClick={() => navigate("/register")}>Register</button>
+          <p>Don't have an account? <a href="/register">Sign Up</a></p>
+
         </div>
       </div>
     </div>

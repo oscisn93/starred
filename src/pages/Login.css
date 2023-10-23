@@ -24,9 +24,22 @@ input {
   background-color: #ccc;
   cursor: pointer;
   transition: ease-in-out 0.15s;
+  font-size: large;
+  font-weight: bold;
 }
 
 button:hover {
   background-color: #ddd;
 
+}
+
+.register-btn a {
+  text-decoration: none;
+  color: #0089c9;
+  font-weight: normal;
+  transition: ease-in-out 0.15s;
+}
+
+.register-btn a:hover {
+  color: #43bdff;
 }
