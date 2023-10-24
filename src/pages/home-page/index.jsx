@@ -2,6 +2,7 @@ import "./index.css";
 import React from "react";
 import { signOutUser } from "../../services/firebase";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import kidFace2 from "../../assets/kidFace1.png";
 import kidFace3 from "../../assets/kidFace2.png";
@@ -44,12 +45,19 @@ const Home = () => {
       <div className="profile">
         <img src={kidFace3} alt="Profile" className="profile-image" />
       </div>
+
       <div className="vertical-container">
+        <Link to="/home">Home</Link>
         <div className="component">
+          <div className="dashboard-image-container">
+              <img className="dashboard-image" src={dashboardIcon} alt="Dashboard Icon"></img>
+              <div className="overlay-rectangle"></div>
+            </div>
           <img className="dashboard-background" src={rectangle}></img>
           <button onClick={handleSignOut}>Log Out</button>
         </div>
       </div>
+
 
       <div className="row-container">
         <div className="component">
@@ -120,23 +128,26 @@ const Home = () => {
         </div>
 
         <div className="component">
-          <h1>Upcoming Tasks</h1>
-          <div className="upcoming-tasks-container">
-            <div className="upcoming-task-item">
-              Upcoming Task 1
-              <div className="upcoming-task-title">Fold Clothes</div>
-              <div className="upcoming-task-description">Description</div>
-              <a className="see-more-link">See More</a>
-            </div>
-            <div className="upcoming-task-item">
-              Upcoming Task 2
-              <div className="upcoming-task-title">Take Trash Out</div>
-              <div className="upcoming-task-description">Description</div>
-              <a className="see-more-link">See More</a>
+          <div className="parent-container">
+            <h1>Upcoming Tasks</h1>
+            <div className="upcoming-tasks-container">
+              <div className="upcoming-task-item">
+                Upcoming Task 1
+                <div className="upcoming-task-title">Fold Clothes</div>
+                <div className="upcoming-task-description">Description</div>
+                <a className="see-more-link">See More</a>
+              </div>
+              <div className="upcoming-task-item">
+                Upcoming Task 2
+                <div className="upcoming-task-title">Take Trash Out</div>
+                <div className="upcoming-task-description">Description</div>
+                <a className="see-more-link">See More</a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+          </div>
+          
     </div>
   );
 };
