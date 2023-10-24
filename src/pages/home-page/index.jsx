@@ -12,6 +12,7 @@ import taskIcon3 from "../../assets/taskIcon3.png";
 import banner from "../../assets/bannerImage.jpg";
 import childrenBanner from "../../assets/childBannerImage.png";
 import rectangle from "../../assets/rectangle.png";
+import dashboardIcon from "../../assets/dashboardIcon.svg";
 
 
 const Home = () => {
@@ -38,6 +39,10 @@ const Home = () => {
             placeholder="Search..."
             onKeyPress={handleKeyPress}
           />
+        </div>
+
+      <div className="profile">
+        <img src={kidFace3} alt="Profile" className="profile-image" />
       </div>
       <div className="vertical-container">
         <div className="component">
