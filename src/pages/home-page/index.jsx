@@ -22,9 +22,23 @@ const Home = () => {
     navigate("/");
   }
 
+  // Placeholder function, will fix this once funcitonality is implemented
+  const handleKeyPress = (e) => { 
+    if (e.key === 'Enter') {
+      console.log('Enter Key Pressed');
+    }
+  };
+
   return (
     <div className="main-content">
 
+      <div className="search-bar">
+          <input
+            type="text"
+            placeholder="Search..."
+            onKeyPress={handleKeyPress}
+          />
+      </div>
       <div className="vertical-container">
         <div className="component">
           <img className="dashboard-background" src={rectangle}></img>
