@@ -54,7 +54,7 @@ const Home = () => {
               <div className="overlay-rectangle"></div>
             </div>
           <img className="dashboard-background" src={rectangle}></img>
-          <button onClick={handleSignOut}>Log Out</button>
+          <button className="logout-button" onClick={handleSignOut}>Log Out</button>
         </div>
       </div>
 

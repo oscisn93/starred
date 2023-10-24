@@ -181,6 +181,12 @@ body {
   z-index: -1;
 }
 
+.logout-button {
+  position: relative;
+  margin-left: 35%;
+  bottom: 350px;
+}
+
 a[href="/home"] {
   position: relative;
   font-family: 'Poppins', sans-serif;
