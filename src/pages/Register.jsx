@@ -4,11 +4,10 @@ import { Link } from 'react-router-dom'
 
 function Register() {
 
+
   return (
     <div>
-      <div>
-        <Link to="/home">Go to Home Page</Link>
-      </div>
+
       <div className='header'>
         <h1>Starred</h1>
       </div>
@@ -17,10 +16,16 @@ function Register() {
         <input type="email" placeholder='Email' />
         <input type="password" placeholder='Password' />
         <input type="password" placeholder='Confirm Password' />
-        <button>Submit</button>
-        <div className="register-btn">
-          <p>Already have an account? <a href="/">Log in</a></p>
+        <div className="submit-btn">
+          <button >Submit</button>
+        </div>
 
+        <div className="footer">
+          <p>Already have an account? <Link to="/">Log In</Link></p>
+
+        </div>
+        <div className="temp">
+          <Link to="/home">Go to Home Page</Link>
         </div>
       </div>
     </div>

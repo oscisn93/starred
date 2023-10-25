@@ -1,5 +1,5 @@
 import "./Login.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { signIn } from "../services/firebase";
 
@@ -57,7 +57,7 @@ function Login() {
           </button>
         </div>
         <div className="register-btn">
-          <p>Don't have an account? <a href="/register">Sign Up</a></p>
+          <p>Don't have an account? <Link to="/register">Sign Up</Link></p>
 
         </div>
       </div>
