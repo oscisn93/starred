@@ -8,6 +8,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   function handleEmail(event) {
     setEmail(event.target.value);
@@ -27,6 +28,10 @@ function Login() {
     });
   }
 
+  function togglePasswordVisibility() {
+    setShowPassword(prev => !prev);
+  }
+
   return (
     <div className="login">
       <div className="header">
@@ -40,12 +45,21 @@ function Login() {
           onChange={handleEmail}
           required
         />
-        <input
-          type="password"
-          placeholder="Password"
-          onChange={handlePassword}
-          required
-        />
+        <div className="password-wrapper">
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            onChange={handlePassword}
+            required
+          />
+          <span
+            className="password-visibility"
+            onClick={togglePasswordVisibility}
+          >
+            {showPassword ? "Hide" : "Show"}
+          </span>
+        </div>
+
         {/* <div className="remember-me">
           <input type="checkbox" />
           <p>Remember me</p>
