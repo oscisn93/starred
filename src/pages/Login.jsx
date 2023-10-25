@@ -33,49 +33,55 @@ function Login() {
   }
 
   return (
-    <div className="login">
-      <div className="header">
+    <div className="center">
+      <div className="title">
         <h1>Starred</h1>
       </div>
-      <div className="login-form">
-        <h2>Login</h2>
-        <input
-          type="email"
-          placeholder="Email"
-          onChange={handleEmail}
-          required
-        />
-        <div className="password-wrapper">
-          <input
-            type={showPassword ? "text" : "password"}
-            placeholder="Password"
-            onChange={handlePassword}
-            required
-          />
-          <span
-            className="password-visibility"
-            onClick={togglePasswordVisibility}
-          >
-            {showPassword ? "Hide" : "Show"}
-          </span>
-        </div>
+      <div className="login">
+        <div className="container">
 
-        {/* <div className="remember-me">
+          <div className="login-form">
+            <h2>Login</h2>
+            <input
+              type="email"
+              placeholder="Email"
+              onChange={handleEmail}
+              required
+            />
+            <div className="password-wrapper">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                onChange={handlePassword}
+                required
+              />
+              <span
+                className="password-visibility"
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? "Hide" : "Show"}
+              </span>
+            </div>
+
+            {/* <div className="remember-me">
           <input type="checkbox" />
           <p>Remember me</p>
         </div> */}
 
-        <div className="submit-btn">
-          <button onClick={handleSubmit}>
-            {loading ? "Logging in..." : "Login"}
-          </button>
-        </div>
-        <div className="register-btn">
-          <p>Don't have an account? <Link to="/register">Sign Up</Link></p>
+            <div className="submit-btn">
+              <button onClick={handleSubmit}>
+                {loading ? "Logging in..." : "Login"}
+              </button>
+            </div>
+            <div className="register-btn">
+              <p>Don't have an account? <Link to="/register">Sign Up</Link></p>
 
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
   );
 }
 

@@ -1,5 +1,27 @@
+.container {
+  width: 350px;
+  max-width: 90%;
+  height: 350px;
+  border-radius: 30px;
+  background-color: rgb(204, 204, 204);
+  box-shadow: rgba(00, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+
+}
+
 .login {
-  max-width: 800px;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
 }
 
 .login-form {
@@ -73,16 +95,22 @@ input[type="password"] {
 
 .password-visibility {
   position: absolute;
-  right: 10px;
-  top: 50%;
+  right: 13px;
+  top: 52%;
   transform: translateY(-50%);
   background: none;
   border: none;
   cursor: pointer;
   color: #0089c9;
   outline: none;
+  font-size: 13px;
+  transition: ease-in-out 0.15s;
 }
 
 .password-visibility:hover {
   color: #10abff;
+}
+
+.title {
+  margin-top: 80px;
 }
