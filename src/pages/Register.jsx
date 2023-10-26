@@ -1,9 +1,13 @@
 import "./Register.css";
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 
 function Register() {
+  const [showPassword, setShowPassword] = useState(false);
 
+  function togglePasswordVisibility() {
+    setShowPassword(prev => !prev);
+  }
 
   return (
     <div>
@@ -14,8 +18,30 @@ function Register() {
       <div className='login-form'>
         <h2>Register</h2>
         <input type="email" placeholder='Email' />
-        <input type="password" placeholder='Password' />
-        <input type="password" placeholder='Confirm Password' />
+        <div className="password-wrapper">
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            // onChange={handlePassword}
+            required
+          />
+          <span
+            className="password-visibility"
+            onClick={togglePasswordVisibility}
+          >
+            {showPassword ? "Hide" : "Show"}
+          </span>
+
+        </div>
+        <input
+          type={showPassword ? "text" : "password"}
+          placeholder="Confirm Password"
+          // onChange={handlePassword}
+          required
+        />
+
+
+
         <div className="register-btn">
           <button >Submit</button>
         </div>

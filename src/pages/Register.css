@@ -32,3 +32,31 @@
 .temp a {
   color: black;
 }
+
+.password-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+input[type="text"],
+input[type="password"] {
+  padding-right: 5px;
+}
+
+.password-visibility {
+  position: absolute;
+  right: 13px;
+  top: 52%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #0089c9;
+  outline: none;
+  font-size: 13px;
+  transition: ease-in-out 0.15s;
+}
+
+.password-visibility:hover {
+  color: #10abff;
+}
