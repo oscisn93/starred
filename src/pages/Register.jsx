@@ -55,7 +55,7 @@ function Register() {
           </div>
 
           <div className="footer">
-            <p>Already have an account? <Link to="/">Log In</Link></p>
+            <p>Already have an account? <Link to="/login">Log In</Link></p>
 
           </div>
           <div className="temp">
