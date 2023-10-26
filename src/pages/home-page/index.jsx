@@ -25,7 +25,7 @@ const Home = () => {
   }
 
   // Placeholder function, will fix this once funcitonality is implemented
-  const handleKeyPress = (e) => { 
+  const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       console.log('Enter Key Pressed');
     }
@@ -47,12 +47,17 @@ const Home = () => {
       </div>
 
       <div className="vertical-container">
-        <Link to="/home">Home</Link>
+        <div className="btn-column-container">
+          <Link to="/home">Home</Link>
+          <Link to="/home">Calendar</Link>
+          <Link to="/home">Tasks</Link>
+          <Link to="/home">Information</Link>
+        </div>
         <div className="component">
           <div className="dashboard-image-container">
               <img className="dashboard-image" src={dashboardIcon} alt="Dashboard Icon"></img>
               <div className="overlay-rectangle"></div>
-            </div>
+          </div>
           <img className="dashboard-background" src={rectangle}></img>
           <button className="logout-button" onClick={handleSignOut}>Log Out</button>
         </div>
@@ -147,7 +152,7 @@ const Home = () => {
           </div>
         </div>
           </div>
-          
+
     </div>
   );
 };

@@ -125,6 +125,16 @@ body {
   margin-right: 25px;
 }
 
+.btn-column-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 300px;
+  position: absolute;
+  top: 200px;
+  justify-content: space-evenly;
+}
+
 .dashboard-image-container {
   position: relative;
 }
@@ -183,8 +193,15 @@ body {
 
 .logout-button {
   position: relative;
-  margin-left: 35%;
+  margin-left: 22%;
   bottom: 350px;
+  width: 150px;
+  height: 50px;
+  border-radius: 20px;
+  font-size: 20px;
+  color: #F2F2F2;
+  background-color: #fe7200;
+  border: 2px solid #F2F2F2;
 }
 
 a[href="/home"] {
