@@ -56,7 +56,14 @@ function Login() {
                 onChange={handlePassword}
                 required
               />
-
+              {password.length > 0 && (
+                <span
+                  className="password-visibility"
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? "Hide" : "Show"}
+                </span>
+              )}
             </div>
 
             {/* <div className="remember-me">
