@@ -31,7 +31,7 @@ h2 {
   align-items: center;
   z-index: 99999;
   background-color: rgb(255, 123, 0);
-  background-image: url("./public/starredbg.jpg");
+  background-image: url("./starredbg.jpg");
 }
 
 .login-form {
