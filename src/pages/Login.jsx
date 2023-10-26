@@ -41,8 +41,9 @@ function Login() {
         <div className="container">
 
           <div className="login-form">
-            <h2>Login</h2>
+            <h2>Welcome Back!</h2>
             <input
+              className="email"
               type="email"
               placeholder="Email"
               onChange={handleEmail}
