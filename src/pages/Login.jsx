@@ -2,6 +2,7 @@ import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { signIn } from "../services/firebase";
+import '../services/firebase.ts';
 
 function Login() {
   const navigate = useNavigate();
