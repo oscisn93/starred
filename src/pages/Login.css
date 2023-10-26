@@ -2,13 +2,18 @@
   width: 350px;
   max-width: 90%;
   height: 350px;
-  border-radius: 30px;
-  background-color: rgb(204, 204, 204);
-  box-shadow: rgba(00, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 40px;
+  background-color: rgba(150, 150, 150, 0.863);
+  /* box-shadow: rgba(00, 0, 0, 0.35) 0px 5px 15px; */
   display: flex;
   flex-direction: column;
   padding: 25px;
 
+}
+
+h2 {
+  color: orange;
+  font-weight: 1600;
 }
 
 .login {
@@ -22,6 +27,8 @@
   justify-content: center;
   align-items: center;
   z-index: 99999;
+  background-color: rgb(255, 123, 0);
+  background-image: url("./public/starredbg.jpg");
 }
 
 .login-form {
@@ -32,12 +39,23 @@
   gap: 5px;
 }
 
+
+
 .login-form input {
   width: 300px;
   height: 30px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
+  border: none;
   padding: 5px;
+  border-bottom: 2px solid #ffffff;
+  background-color: rgba(0, 0, 0, 0);
+  color: rgb(255, 255, 255);
+  outline: none;
+}
+
+.login-form input::placeholder {
+  color: white;
+  font-size: large;
+  font-weight: bold;
 }
 
 .submit-btn button {
@@ -45,9 +63,9 @@
   width: 200px;
   height: 40px;
   border-radius: 20px;
-  border: 2px solid #0089c9;
+  border: 2px solid #fd7200;
   padding: 5px;
-  background-color: #0089c9;
+  background-color: #fd7200;
   cursor: pointer;
   transition: ease-in-out 0.15s;
   font-size: large;
@@ -56,8 +74,8 @@
 }
 
 button:hover {
-  background-color: #10abff;
-  border: 2px solid #10abff;
+  background-color: #ff8b2d;
+  border: 2px solid #ff8b2d;
 }
 
 .register-btn a {
