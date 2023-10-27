@@ -1,6 +1,5 @@
 .landing {
   display: flex;
-  justify-content: space-between;
   width: 100vw;
   max-width: none !important;
   max-height: none !important;
@@ -41,13 +40,17 @@
   border-radius: 50%;
 }
 
+.buttons {
+  display: flex;
+  flex-direction: row;
+}
+
 .buttons button {
   text-decoration: none;
-  margin: 20px;
+  margin-right: 20px;
   width: 150px;
   height: 40px;
-  border-radius: 20px;
-  padding: 5px;
+  border-radius: 10px;
   cursor: pointer;
   transition: ease-in-out 0.15s;
   font-size: large;
@@ -74,8 +77,9 @@
 }
 
 .register-button:hover {
-  border: 2px solid #ffbc86;
-  color: #ffffff;
+  border: 2px solid #ff8b2d;
+  color: #ff8b2d;
+  background-color: white;
 }
 
 .left-container h1 {

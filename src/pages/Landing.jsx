@@ -8,7 +8,7 @@ function Landing() {
     <div className="landing">
       <div className="left-container">
         <h1>Starred</h1>
-        <p>Welcome!</p>
+        <h3>Welcome!</h3>
         <p>
           Please Log In or Create an Account
         </p>
