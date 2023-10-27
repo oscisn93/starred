@@ -6,7 +6,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { setDoc, doc, Firestore } from "firebase/firestore";
-import { logError } from "./firebase";
+import { logError } from "./utils";
 import { UserData, Role, Goal, Reward, Task } from "./types";
 
 export class UserService {

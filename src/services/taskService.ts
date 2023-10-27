@@ -1,7 +1,7 @@
-import { Firestore, doc, getDoc, setDoc } from "firebase/firestore";
-import { Task, TaskData } from "./types";
+import { Firestore, addDoc, doc, getDoc, setDoc, collection } from "firebase/firestore";
+import { Task } from "./types";
 import { Auth } from "firebase/auth";
-import { logError } from "./firebase";
+import { logError } from "./utils";
 
 export class TaskService {
   private auth: Auth;
@@ -11,13 +11,13 @@ export class TaskService {
     this.db = db;
   }
 
-  async getTasks(userID: string): Promise<Array<Task>> {
+  async getAll(): Promise<Array<Task>> {
     try {
       const user = this.auth.currentUser;
       if (!user) {
         throw new Error("401: Not Authenticated");
       }
-      const userRef = doc(this.db, "users", userID);
+      const userRef = doc(this.db, "users", user.uid);
       const userSnap = await getDoc(userRef);
       if (userSnap.exists()) {
         const tasks = userSnap.data().tasks;
@@ -31,12 +31,12 @@ export class TaskService {
     return [];
   }
 
-  async getTask(userID: string) {
+  async get(taskID: string) {
     try {
-      const docRef = doc(this.db, "users", userID);
+      const docRef = doc(this.db, "tasks", taskID);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        return docSnap.data().tasks;
+        return docSnap.data();
       } else {
         console.log("No such document!");
       }
@@ -45,32 +45,38 @@ export class TaskService {
     }
   }
 
-  async addTask(userID: string, task: TaskData) {
+  async addTask(task: Task) {
+    const user = this.auth.currentUser;
+
+    if (!user) {
+      throw new Error("401: Not Authenticated");
+    }
+
     try {
-      const docRef = doc(this.db, "users", userID);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        const tasks = docSnap.data().tasks;
-        tasks.push(task);
-        await setDoc(docRef, { tasks: tasks }, { merge: true });
-      } else {
-        console.log("Not a valid user ID");
-      }
+      const docRef = await addDoc(collection(this.db, "tasks"), task);
+
     } catch (err) {
       logError(err);
     }
   }
 
-  async updateTask(userID: string, taskID: string, task: Task) {
+  async updateTask(taskID: string, task: Task) {
+    const user = this.auth.currentUser;
+
+    if (!user) {
+      throw new Error("401: Not Authenticated");
+    }
+
     try {
-      const docRef = doc(this.db, "users", userID);
+      // first update the task
+      const docRef = doc(this.db, "tasks", taskID);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        const tasks = docSnap.data().tasks;
+        const tasks = docSnap.data();
         tasks[taskID] = task;
         await setDoc(docRef, { tasks: tasks }, { merge: true });
       } else {
-        console.log("Not a valid user ID");
+        console.log("Not a valid taskID");
       }
     } catch (err) {
       logError(err);

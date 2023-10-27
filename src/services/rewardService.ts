@@ -1,13 +1,21 @@
 // rewards services
 
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { logError } from "./firebase";
-import { RewardData } from "./types";
-import { db } from "./userService";
+import { logError } from "./utils";
+import { RewardData, Reward } from "./types";
+import { Auth } from "firebase/auth";
+import { Firestore } from "firebase/firestore";
 
-async function getRewards(userID: string) {
+export class RewardService {
+  private rewards: Reward[];
+  constructor(private auth: Auth, private db: Firestore) {
+    this.auth = auth;
+    this.db = db;
+    this.rewards = [];
+  }
+  async getRewards(userID: string) {
     try {
-      const docRef = doc(db, "users", userID);
+      const docRef = doc(this.db, "users", userID);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         return docSnap.data().rewards;
@@ -18,10 +26,10 @@ async function getRewards(userID: string) {
       logError(err);
     }
   }
-  
-  async function getReward(userID: string) {
+
+  async getReward(userID: string) {
     try {
-      const docRef = doc(db, "users", userID);
+      const docRef = doc(this.db, "users", userID);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         return docSnap.data().rewards;
@@ -32,10 +40,10 @@ async function getRewards(userID: string) {
       logError(err);
     }
   }
-  
-  async function addReward(userID: string, reward: RewardData) {
+
+  async addReward(userID: string, reward: RewardData) {
     try {
-      const docRef = doc(db, "users", userID);
+      const docRef = doc(this.db, "users", userID);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         const rewards = docSnap.data().rewards;
@@ -48,14 +56,10 @@ async function getRewards(userID: string) {
       logError(err);
     }
   }
-  
-  async function updateReward(
-    userID: string,
-    rewardID: string,
-    reward: RewardData
-  ) {
+
+  async updateReward(userID: string, rewardID: string, reward: RewardData) {
     try {
-      const docRef = doc(db, "users", userID);
+      const docRef = doc(this.db, "users", userID);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         const rewards = docSnap.data().rewards;
@@ -68,10 +72,10 @@ async function getRewards(userID: string) {
       logError(err);
     }
   }
-  
-  async function deleteReward(rewardID: string) {
+
+  async deleteReward(rewardID: string) {
     try {
-      const docRef = doc(db, "users", rewardID);
+      const docRef = doc(this.db, "users", rewardID);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         const rewards = docSnap.data().rewards;
@@ -84,3 +88,4 @@ async function getRewards(userID: string) {
       logError(err);
     }
   }
+}

@@ -1,13 +1,22 @@
 // goals services
 
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { logError } from "./firebase";
-import { GoalData } from "./types";
-import { db } from "./userService";
+import { logError } from "./utils";
+import { GoalData, Goal } from "./types";
+import  { Auth } from "firebase/auth";
+import { Firestore } from "firebase/firestore";
 
-export async function getGoals(userID: string) {
+export class GoalService {
+  private goals: Goal[];
+  constructor(private auth: Auth, private db: Firestore) {
+    this.auth = auth;
+    this.db = db;
+    this.goals = [];
+  }
+
+async getGoals(userID: string) {
     try {
-      const docRef = doc(db, "users", userID);
+      const docRef = doc(this.db, "users", userID);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         return docSnap.data().goals;
@@ -19,9 +28,9 @@ export async function getGoals(userID: string) {
     }
   }
   
-  export async function getGoal(userID: string) {
+  async getGoal(userID: string) {
     try {
-      const docRef = doc(db, "users", userID);
+      const docRef = doc(this.db, "users", userID);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         return docSnap.data().goals;
@@ -33,9 +42,9 @@ export async function getGoals(userID: string) {
     }
   }
   
-  async function addGoal(userID: string, goal: GoalData) {
+  async addGoal(userID: string, goal: GoalData) {
     try {
-      const docRef = doc(db, "users", userID);
+      const docRef = doc(this.db, "users", userID);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         const goals = docSnap.data().goals;
@@ -49,9 +58,9 @@ export async function getGoals(userID: string) {
     }
   }
   
-  async function updateGoal(userID: string, goalID: string, goal: GoalData) {
+  async updateGoal(userID: string, goalID: string, goal: GoalData) {
     try {
-      const docRef = doc(db, "users", userID);
+      const docRef = doc(this.db, "users", userID);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         const goals = docSnap.data().goals;
@@ -65,9 +74,9 @@ export async function getGoals(userID: string) {
     }
   }
   
-  async function deleteGoal(goalID: string) {
+  async deleteGoal(goalID: string) {
     try {
-      const docRef = doc(db, "users", goalID);
+      const docRef = doc(this.db, "users", goalID);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         const goals = docSnap.data().goals;
@@ -80,3 +89,4 @@ export async function getGoals(userID: string) {
       logError(err);
     }
   }
+}

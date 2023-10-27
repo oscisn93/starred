@@ -1,13 +1,11 @@
 import { Navigate } from "react-router-dom";
-import { getAuth } from "firebase/auth";
-
+import { auth } from "../services/firebase";
+// @ts-ignore
 export default function Protected({ children }) {
-  const auth = getAuth();
-  const user = auth.currentUser;
-  console.log(user);
-  if (!auth.currentUser) {
-    return <Navigate to="/" replace />;
-  } else {
+  const user = auth.currentUser;  
+  if (user) {
     return children;
   }
+
+  return <Navigate to="/login" />;
 }
