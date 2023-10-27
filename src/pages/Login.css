@@ -21,7 +21,7 @@ h2 {
 
 .login {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   position: fixed;
   left: 50%;
   top: 50%;
@@ -30,8 +30,11 @@ h2 {
   justify-content: center;
   align-items: center;
   z-index: 99999;
-  background-color: rgb(255, 123, 0);
-  background-image: url("./starredbg.jpg");
+  background-color: rgba(255, 123, 0, 0.559);
+  background-image: url("../assets/loginImage.jpg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
 }
 
 .login-form {
@@ -51,7 +54,7 @@ h2 {
   padding: 5px;
   border-bottom: 2px solid #ffffff;
   background-color: rgba(0, 0, 0, 0);
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   outline: none;
   font-size: large;
   font-weight: bold;
