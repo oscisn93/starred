@@ -5,19 +5,20 @@
   max-height: none !important;
   height: 100vh;
   margin: 0 !important;
-  padding: 0;
+  padding: 0% !important;
+  background-color: white;
 }
 
 .left-container {
   flex: 0.5;
-  padding: 5% 3%;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   max-width: 50%;
-  margin: 0 auto;
+  margin-left: 5%;
+  margin-right: 20%;
 }
 
 .right-container {

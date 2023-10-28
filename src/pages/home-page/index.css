@@ -175,7 +175,7 @@ body {
   margin-bottom: 20px;
 }
 
-.component h1{
+.component h1 {
   justify-content: left;
   height: 40px;
   margin-bottom: 10px;
@@ -218,7 +218,7 @@ a[href="/home"]:hover {
   text-decoration: underline;
 }
 
-.welcome-container{
+.welcome-container {
   width: 1015px;
   height: 252px;
   display: inline-flex;
@@ -230,7 +230,7 @@ a[href="/home"]:hover {
   color: #F2F2F2;
 }
 
-.banner-background{
+.banner-background {
   width: 1035px;
   height: 252px;
   border-radius: 30px;
@@ -238,14 +238,14 @@ a[href="/home"]:hover {
   z-index: -1;
 }
 
-.introduction{
+.introduction {
   width: 1015px;
   height: 252px;
   text-indent: 40px;
   font-family: Poppins;
 }
 
-.welcome-title{
+.welcome-title {
   width: 531.72px;
   height: 58.99px;
   top: 287px;
@@ -257,7 +257,7 @@ a[href="/home"]:hover {
   text-indent: 45px;
 }
 
-.date{
+.date {
   font-size: 25px;
   line-height: 37.5px;
   font-weight: 400;
@@ -266,7 +266,7 @@ a[href="/home"]:hover {
   height: 48.64px;
 }
 
-.subtitle{
+.subtitle {
   width: 443.27px;
   height: 33.12px;
   top: 346px;
@@ -279,7 +279,7 @@ a[href="/home"]:hover {
   text-indent: 50px;
 }
 
-.child-banner{
+.child-banner {
   width: 331.66px;
   height: 252px;
 }
@@ -334,7 +334,7 @@ a[href="/home"]:hover {
   border-radius: 50%;
 }
 
-#guardians-title{
+#guardians-title {
   margin-left: 20px;
 }
 
@@ -345,7 +345,7 @@ a[href="/home"]:hover {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content:space-between;
+  justify-content: space-between;
 }
 
 .guardian-item {
@@ -362,7 +362,7 @@ a[href="/home"]:hover {
   transition: box-shadow 0.3s ease;
 }
 
-.guardian-item h4{
+.guardian-item h4 {
   text-align: center;
   font-size: 14px;
 }
@@ -401,7 +401,7 @@ a[href="/home"]:hover {
   position: relative;
 }
 
-.task-item-in-progress:hover{
+.task-item-in-progress:hover {
   transform: scale(1.05);
   transition: transform 0.3s ease;
 }
@@ -436,6 +436,7 @@ a[href="/home"]:hover {
   position: relative;
   top: -69px;
 }
+
 .upcoming-tasks-container {
   width: 263px;
   height: 262px;
@@ -487,7 +488,8 @@ a[href="/home"]:hover {
   margin-right: 170px;
 }
 
-#progress-title, .see-more-link-large {
+#progress-title,
+.see-more-link-large {
   display: inline;
 }
 
@@ -500,8 +502,9 @@ a[href="/home"]:hover {
   }
 }
 
-@media (max-width: 1335px){
+@media (max-width: 1335px) {
   .vertical-container {
-      display: none;      /* will work on changing this later*/
+    display: none;
+    /* will work on changing this later*/
   }
 }
