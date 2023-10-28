@@ -46,7 +46,7 @@ html {
   width: 500px;
   height: auto;
   aspect-ratio: 1/1;
-  background-image: url("../assets/loginImage.jpg");
+  background-image: url("../assets/landingPageImage.png");
   background-size: cover;
   display: flex;
   justify-content: center;
@@ -101,4 +101,26 @@ html {
   font-size: 4rem;
   font-weight: 700;
   color: #000000;
+}
+
+@media (max-width: 768px) {
+  .landing {
+    flex-direction: column;
+  }
+
+  .left-container,
+  .right-container {
+    flex: 1;
+
+    max-width: 100%;
+
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .left-container {
+    margin: 0 5%;
+    align-items: center;
+  }
+
 }
