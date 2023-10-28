@@ -8,10 +8,9 @@ function Landing() {
     <div className="landing">
       <div className="left-container">
         <h1>Starred</h1>
-        <p>We enjoy children</p>
+        <h3>Welcome!</h3>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-          lacinia odio vitae vestibulum.
+          Please Log In or Create an Account
         </p>
         <div className="buttons">
           <Link to="/login">
