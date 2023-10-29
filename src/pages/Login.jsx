@@ -1,7 +1,8 @@
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
-import { signIn } from "../services/firebase";
+import { useState } from "react";
+import { userService } from "../services/firebase";
+import "../services/firebase";
 
 function Login() {
   const navigate = useNavigate();
@@ -10,33 +11,32 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+  // @ts-ignore
   function handleEmail(event) {
     setEmail(event.target.value);
   }
 
+  // @ts-ignore
   function handlePassword(event) {
     setPassword(event.target.value);
   }
 
-  function handleSubmit(event) {
+  // @ts-ignore
+  async function handleSubmit(event) {
     event.preventDefault();
     setLoading(true);
-    signIn(email, password).then((user) => {
-      console.log(user);
-      setLoading(false);
-      return navigate("/home");
-    });
+    await userService.signIn(email, password);
+    return navigate("/home");
   }
 
   function togglePasswordVisibility() {
-    setShowPassword(prev => !prev);
+    setShowPassword((prev) => !prev);
   }
 
   return (
     <div className="center">
       <div className="login">
         <div className="container">
-
           <div className="login-form">
             <h2>Welcome Back!</h2>
             <input
@@ -53,14 +53,12 @@ function Login() {
                 onChange={handlePassword}
                 required
               />
-              {password.length > 0 && (
-                <span
-                  className="password-visibility"
-                  onClick={togglePasswordVisibility}
-                >
-                  {showPassword ? "Hide" : "Show"}
-                </span>
-              )}
+              <span
+                className="password-visibility"
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? "Hide" : "Show"}
+              </span>
             </div>
 
             {/* <div className="remember-me">
@@ -74,14 +72,14 @@ function Login() {
               </button>
             </div>
             <div className="register-btn">
-              <p>Don't have an account? <Link to="/register">Sign Up</Link></p>
-
+              <p>
+                Don't have an account? <Link to="/register">Sign Up</Link>
+              </p>
             </div>
           </div>
         </div>
       </div>
     </div>
-
   );
 }
 

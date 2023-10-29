@@ -1,18 +1,27 @@
 import "./index.css";
-import React from "react";
-import { signOutUser } from "../../services/firebase";
+import { userService } from "../../services/firebase";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
+// @ts-ignore
 import kidFace2 from "../../assets/kidFace1.png";
+// @ts-ignore
 import kidFace3 from "../../assets/kidFace2.png";
+// @ts-ignore
 import kidFace4 from "../../assets/kidFace3.png";
+// @ts-ignore
 import taskIcon1 from "../../assets/taskIcon1.png";
+// @ts-ignore
 import taskIcon2 from "../../assets/taskIcon2.png";
+// @ts-ignore
 import taskIcon3 from "../../assets/taskIcon3.png";
+// @ts-ignore
 import banner from "../../assets/bannerImage.jpg";
+// @ts-ignore
 import childrenBanner from "../../assets/childBannerImage.png";
+// @ts-ignore
 import rectangle from "../../assets/rectangle.png";
+// @ts-ignore
 import dashboardIcon from "../../assets/dashboardIcon.svg";
 
 
@@ -20,11 +29,12 @@ const Home = () => {
   const navigate = useNavigate();
 
   function handleSignOut() {
-    signOutUser();
+    userService.signOutUser();
     navigate("/");
   }
 
   // Placeholder function, will fix this once funcitonality is implemented
+  // @ts-ignore
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       console.log('Enter Key Pressed');
@@ -50,7 +60,7 @@ const Home = () => {
         <div className="btn-column-container">
           <Link to="/home">Home</Link>
           <Link to="/home">Calendar</Link>
-          <Link to="/home">Tasks</Link>
+          <Link to="/playground">Tasks</Link>
           <Link to="/home">Information</Link>
         </div>
         <div className="component">

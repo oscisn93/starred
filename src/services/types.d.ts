@@ -1,52 +1,70 @@
 import { Timestamp } from "firebase/firestore";
 
-export interface UserData {
-    email: string;
-    firstName: string;
-    lastName: string;
-};
-
-type Role = 'guardians' | 'dependents' | 'role-models';
-
 interface Resource {
-    userID: string;
-    creatorID: string;
-    guardianID: string;
-};
+  userID: string;
+  creatorID: string;
+  guardianID: string;
+}
 
 export interface TaskData extends Resource {
-    title: string;
-    description: string | null;
-    completed: boolean;
-    goalID: string;
-    dueDate: Date | null;
-    points: number;
-};
+  title: string;
+  description: string | null;
+  completed: boolean;
+  goalID: string;
+  dueDate: Date | null;
+  points: number;
+}
 
-export interface Task extends TaskData {
-    taskID: string;
-};
+export type Task = TaskData & {
+  taskID: string;
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
+}
 
 export interface GoalData extends Resource {
-    title: string;
-    description: string | null;
-};
+  title: string;
+  description: string | null;
+}
 
-export interface Goal extends GoalData {
-    goalID: string;
-    tasks: Task[];
-};
+export type Goal = GoalData & {
+  goalID: string;
+  tasks: Task[];
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
+}
 
 export interface RewardData extends Resource {
-    name: string;
-    price: number;
-    description: string | null;
-    points: number;
-    url: string | null;
-    approved: boolean;
-    earned: boolean;
-};
+  name: string;
+  price: number;
+  description: string | null;
+  points: number;
+  url: string | null;
+  approved: boolean;
+  earned: boolean;
+}
 
-export interface Reward extends RewardData {
-    rewardID: string;
+export type Reward  = RewardData & {
+  rewardID: string;
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
+}
+
+type Role = "guardians" | "dependents" | "role-models";
+
+export interface UserData {
+  email: string;
+  firstName: string;
+  lastName: string;
+  role: Role;
+}
+
+export type AppUser = UserData & {
+  userID: string;
+  points: number | null;
+  tasks: Task[];
+  goals: Goal[];
+  rewards: Reward[];
+  guardianID: string | null;
+  roleModels: AppUser[];
+  dependents: AppUser[];
 };
