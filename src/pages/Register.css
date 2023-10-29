@@ -109,3 +109,14 @@ button:hover {
   background-color: #ff8b2d;
   border: 2px solid #ff8b2d;
 }
+
+.name-form {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.name-form input {
+  width: calc(50% - 15px);
+  margin: 0 10px;
+}
