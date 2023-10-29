@@ -1,8 +1,8 @@
+// @ts-nocheck
 import "./Register.css";
-
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import { createRoleModelAccount } from "../services/firebase";
+import { userService } from "../services/firebase";
 
 function Register() {
   const navigate = useNavigate();
@@ -40,10 +40,11 @@ function Register() {
     const userData = {
       email: email,
       firstName: firstName,
-      lastName: lastName
+      lastName: lastName,
+      role: "role-models"
     };
 
-    createRoleModelAccount(userData, password).then((user) => {
+    userService.registerUser(userData, password, password).then((user) => {
       console.log(user);
       setLoading(false);
       return navigate("/home");

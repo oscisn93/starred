@@ -25,8 +25,7 @@ function Login() {
   async function handleSubmit(event) {
     event.preventDefault();
     setLoading(true);
-    const response = await userService.signIn(email, password);
-    console.log(response);
+    await userService.signIn(email, password);
     return navigate("/home");
   }
 

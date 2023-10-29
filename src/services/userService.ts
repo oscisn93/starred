@@ -135,15 +135,14 @@ export class UserService {
   async registerUser(
     userData: UserData,
     password: string,
-    confirmedPassword: string,
-    role: Role
+    confirmedPassword: string
   ): Promise<void> {
     // check if the passwords match
     if (password !== confirmedPassword) {
       throw new Error("403: Passwords do not match");
     }
     // redirect based on role
-    switch (role) {
+    switch (userData.role) {
       case "guardians":
         this.createGuardianAccount(userData, password);
         break;
@@ -176,31 +175,5 @@ export class UserService {
     } catch (err) {
       logError(err);
     }
-  }
-  /**
-   * grants a user access to a resources owned
-   * by another user, if they are a guardian
-   * or the role mode that created the resource
-   */
-  async isAuthorized(
-    userID: string,
-    resource: Task | Goal | Reward
-  ): Promise<boolean> {
-    // make sure user is logged in
-    const user = this.auth.currentUser;
-    if (!user) {
-      throw new Error("401: Not Authenticated");
-    }
-    // if user is the creator, guardian, or dependent
-    // whose resource it is, return true
-    if (
-      resource.userID === userID ||
-      resource.creatorID === user.uid ||
-      resource.guardianID === user.uid
-    ) {
-      return true;
-    }
-    // otherwise, return false
-    return false;
   }
 }
