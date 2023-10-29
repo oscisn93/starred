@@ -1,10 +1,8 @@
 import "./Login.css";
-import { Link, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import { useState } from "react";
 import { signIn } from "../services/firebase";
 
-function Login() {
-  const navigate = useNavigate();
+function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -21,10 +19,8 @@ function Login() {
   function handleSubmit(event) {
     event.preventDefault();
     setLoading(true);
-    signIn(email, password).then((user) => {
-      console.log(user);
+    signIn(email, password).then(() => {
       setLoading(false);
-      return navigate("/home");
     });
   }
 
@@ -74,7 +70,10 @@ function Login() {
               </button>
             </div>
             <div className="register-btn">
-              <p>Don't have an account? <Link to="/register">Sign Up</Link></p>
+              <p>Don't have an account?<a href="/register" onClick={(event)=> {
+                event.preventDefault();
+                props.cb('register');
+              }}>Register Today!</a></p>
 
             </div>
           </div>

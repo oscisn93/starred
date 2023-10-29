@@ -1,11 +1,8 @@
 import "./Register.css";
-
-import React, { useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from 'react';
 import { createRoleModelAccount } from "../services/firebase";
 
-function Register() {
-  const navigate = useNavigate();
+function Register(props) {
   const [email, setEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
@@ -46,7 +43,6 @@ function Register() {
     createRoleModelAccount(userData, password).then((user) => {
       console.log(user);
       setLoading(false);
-      return navigate("/home");
     });
   }
 
@@ -110,11 +106,10 @@ function Register() {
           </div>
 
           <div className="footer">
-            <p>Already have an account? <Link to="/login">Log In</Link></p>
-
-          </div>
-          <div className="temp">
-            <Link to="/home">Go to Home Page</Link>
+            <p>Already have an account? <a href="/" onClick={(event) => {
+              event.preventDefault();
+              props.cb('login');
+            }}>Log In</a></p>
           </div>
         </div>
       </div>
