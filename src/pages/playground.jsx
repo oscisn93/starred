@@ -1,14 +1,8 @@
-// @ts-nocheck
-import { useState, useReducer } from "react";
-import {
-  auth,
-  userService,
-  goalService,
-  taskService,
-  rewardService,
-} from "../services/firebase";
+import { useReducer } from "react";
+import { auth, taskService } from "../services/firebase";
 import { Timestamp } from "firebase/firestore";
 
+// @ts-ignore
 function reducer(state, action) {
   switch (action.type) {
     case "title":
@@ -37,7 +31,9 @@ function reducer(state, action) {
 }
 
 export default function Playground() {
-  if (!isAuthed()) {
+  const user = auth.currentUser;
+
+  if (!user) {
     throw new Error("401: User is not logged in");
   }
 
@@ -55,11 +51,12 @@ export default function Playground() {
     points: 0,
     goalID: "None",
   });
-
+  // @ts-ignore
   function handleInputChange(e) {
+    // @ts-ignore
     dispatch({ type: e.target.name, payload: e.target.value });
   }
-
+  // @ts-ignore
   function handleUpdate(e) {
     e.preventDefault();
     taskService.addTask(state);
@@ -83,7 +80,7 @@ export default function Playground() {
           <input
             type="text"
             name="title"
-            id="task-title"
+            id="title"
             value={state.title}
             onChange={(e) => handleInputChange(e)}
           />
@@ -92,7 +89,7 @@ export default function Playground() {
           <label htmlFor="description">Description</label>
           <textarea
             name="description"
-            id="task-description"
+            id="description"
             cols={25}
             value={state.description}
             onChange={(e) => handleInputChange(e)}
@@ -103,7 +100,7 @@ export default function Playground() {
           <input
             type="date"
             name="dueDate"
-            id="task-dueDate"
+            id="dueDate"
             value={state.dueDate}
             onChange={(e) => handleInputChange(e)}
           />
@@ -113,7 +110,7 @@ export default function Playground() {
           <input
             type="number"
             name="points"
-            id="task-points"
+            id="points"
             value={state.points}
             onChange={(e) => handleInputChange(e)}
           />
@@ -123,7 +120,7 @@ export default function Playground() {
           <input
             type="checkbox"
             name="completed"
-            id="task-completed"
+            id="completed"
             value={state.completed}
             onChange={(e) => handleInputChange(e)}
           />
@@ -133,12 +130,12 @@ export default function Playground() {
           <input
             type="text"
             name="goalID"
-            id="task-goalID"
+            id="goalID"
             value={state.goalID}
             onChange={(e) => handleInputChange(e)}
           />
         </div>
-        <input type="button" value="Update" onClick={handleUpdate} />
+        <input id="task-update-button" name="task-update" type="button" value="Update" onClick={handleUpdate} />
       </form>
     </main>
   );
