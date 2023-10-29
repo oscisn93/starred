@@ -1,10 +1,21 @@
 import "./Register.css";
+
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from "react-router-dom";
+import { createRoleModelAccount } from "../services/firebase";
 
 function Register() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+
+  function handleEmail(event) {
+    setEmail(event.target.value);
+  }
 
   function togglePasswordVisibility() {
     setShowPassword(prev => !prev);
@@ -14,16 +25,58 @@ function Register() {
     setPassword(event.target.value);
   }
 
+  function handleFirstName(event) {
+    setFirstName(event.target.value);
+  }
+
+  function handleLastName(event) {
+    setLastName(event.target.value);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    setLoading(true);
+
+    const userData = {
+      email: email,
+      firstName: firstName,
+      lastName: lastName
+    };
+
+    createRoleModelAccount(userData, password).then((user) => {
+      console.log(user);
+      setLoading(false);
+      return navigate("/home");
+    });
+  }
+
   return (
     <div className="register">
-      <div className='header'>
-        {/* <h1>Starred</h1> */}
-      </div>
       <div className="container">
 
         <div className='login-form'>
           <h2>Create an Account!</h2>
-          <input type="email" placeholder='Email' />
+          <div className="name-form">
+            <input
+              type="text"
+              placeholder="First Name"
+              value={firstName}
+              onChange={handleFirstName}
+            />
+            <input
+              type="text"
+              placeholder="Last Name"
+              value={lastName}
+              onChange={handleLastName}
+            />
+          </div>
+          <input
+            className="email"
+            type="email"
+            placeholder="Email"
+            onChange={handleEmail}
+            required
+          />
           <div className="password-wrapper">
             <input
               type={showPassword ? "text" : "password"}
@@ -51,7 +104,9 @@ function Register() {
 
 
           <div className="register-btn">
-            <button >Submit</button>
+            <button onClick={handleSubmit}>
+              {loading ? "Registering..." : "Register"}
+            </button>
           </div>
 
           <div className="footer">

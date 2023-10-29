@@ -8,9 +8,14 @@ function Landing() {
     <div className="landing">
       <div className="left-container">
         <h1>Starred</h1>
-        <h3>Welcome!</h3>
+        <h3>🌟 Transform Your Child's Routine into a World of Achievements! 🌟</h3>
         <p>
-          Please Log In or Create an Account
+          Our platform is designed to make daily tasks and
+          responsibilities exciting and rewarding for your
+          little ones, helping to instill a sense of achievement
+          and responsibility from an early age. To get started,
+          simply register for an account and create a profile. If you
+          already have an account, please sign in!
         </p>
         <div className="buttons">
           <Link to="/login">

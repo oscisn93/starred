@@ -36,9 +36,6 @@ function Login() {
 
   return (
     <div className="center">
-      <div className="title">
-        <h1>Starred</h1>
-      </div>
       <div className="login">
         <div className="container">
           <div className="login-form">
