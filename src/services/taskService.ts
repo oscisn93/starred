@@ -93,7 +93,7 @@ export class TaskService {
         }
         return taskSnap.data();
       } else {
-        console.log("No such document!");
+        throw new Error("404: Task not found.");
       }
     } catch (err) {
       logError(err);
