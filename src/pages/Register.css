@@ -10,7 +10,9 @@
   align-items: center;
   z-index: 99999;
   background-color: rgb(255, 123, 0);
-  background-image: url("./starredbg.jpg");
+  background-image: url("../assets/loginBackground.png");
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .container {
@@ -48,11 +50,15 @@ h2 {
   color: rgb(243, 243, 243);
 }
 
+.footer p {
+  font-weight: bold;
+}
+
 
 .footer a {
   text-decoration: none;
   color: #0089c9;
-  font-weight: normal;
+  font-weight: bold;
   transition: ease-in-out 0.15s;
 }
 
