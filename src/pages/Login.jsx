@@ -1,3 +1,4 @@
+// @ts-nocheck
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -11,17 +12,14 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  // @ts-ignore
   function handleEmail(event) {
     setEmail(event.target.value);
   }
 
-  // @ts-ignore
   function handlePassword(event) {
     setPassword(event.target.value);
   }
 
-  // @ts-ignore
   async function handleSubmit(event) {
     event.preventDefault();
     setLoading(true);

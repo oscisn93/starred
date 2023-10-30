@@ -1,5 +1,6 @@
 // @ts-nocheck
 import { useReducer } from "react";
+import { useNavigate } from "react-router-dom";
 import { auth, taskService } from "../services/firebase";
 import { Timestamp } from "firebase/firestore";
 
@@ -32,6 +33,7 @@ function reducer(state, action) {
 
 export default function TaskCreate() {
   const user = auth.currentUser;
+  const navigate = useNavigate();
 
   if (!user) {
     throw new Error("401: User is not logged in");
@@ -59,6 +61,7 @@ export default function TaskCreate() {
   function handleUpdate(e) {
     e.preventDefault();
     taskService.addTask(state);
+    navigate("/home");
   }
 
   return (

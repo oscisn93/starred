@@ -56,14 +56,14 @@ const Home = () => {
   // modal state
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalItem, setItem] = useState(null);
-  // modal handlers 
+  // modal handlers
   function openModal() {
     setIsOpen(true);
   }
   // set item null when closed
   function closeModal() {
     setIsOpen(false);
-    // need to use a timeout to allow the modal 
+    // need to use a timeout to allow the modal
     // to close before setting the item to null
     setTimeout(() => {
       setItem(null);
@@ -78,21 +78,20 @@ const Home = () => {
   // Placeholder function, will fix this once funcitonality is implemented
   // @ts-ignore
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      console.log('Enter Key Pressed');
+    if (e.key === "Enter") {
+      console.log("Enter Key Pressed");
     }
   };
 
   return (
     <div className="main-content">
-
       <div className="search-bar">
-          <input
-            type="text"
-            placeholder="Search..."
-            onKeyPress={handleKeyPress}
-          />
-        </div>
+        <input
+          type="text"
+          placeholder="Search..."
+          onKeyPress={handleKeyPress}
+        />
+      </div>
 
       <div className="profile">
         <img src={kidFace3} alt="Profile" className="profile-image" />
@@ -107,14 +106,19 @@ const Home = () => {
         </div>
         <div className="component">
           <div className="dashboard-image-container">
-              <img className="dashboard-image" src={dashboardIcon} alt="Dashboard Icon"></img>
-              <div className="overlay-rectangle"></div>
+            <img
+              className="dashboard-image"
+              src={dashboardIcon}
+              alt="Dashboard Icon"
+            ></img>
+            <div className="overlay-rectangle"></div>
           </div>
           <img className="dashboard-background" src={rectangle}></img>
-          <button className="logout-button" onClick={handleSignOut}>Log Out</button>
+          <button className="logout-button" onClick={handleSignOut}>
+            Log Out
+          </button>
         </div>
       </div>
-
 
       <div className="row-container">
         <div className="component">
@@ -129,20 +133,28 @@ const Home = () => {
             </div>
             <img src={childrenBanner} className="child-banner"></img>
           </div>
-          </div>
         </div>
+      </div>
 
       <div className="row-container">
         <div className="component">
-          <h1>Tasks</h1>
+          <h1>Tasks</h1>            
+          <Link to="/task" className="add-task-button">
+              Add Task
+            </Link>
           <div className="task-list-container">
+
             {tasks.map((task, index) => (
-            <div key={index} className="task-item">
-              <img src={taskIcons[index]} className="task-item-image" onClick={() => {
-                setItem(task);
-              openModal();
-              }}/>
-            </div>
+              <div key={index} className="task-item">
+                <img
+                  src={taskIcons[index]}
+                  className="task-item-image"
+                  onClick={() => {
+                    setItem(task);
+                    openModal();
+                  }}
+                />
+              </div>
             ))}
           </div>
         </div>
@@ -172,13 +184,22 @@ const Home = () => {
           <a className="see-more-link-large">See More</a>
           <div className="task-in-progress-container">
             <div className="task-item-in-progress">
-              <img src={taskIcon1} className="task-item-in-progress-image"></img>
+              <img
+                src={taskIcon1}
+                className="task-item-in-progress-image"
+              ></img>
             </div>
             <div className="task-item-in-progress">
-              <img src={taskIcon2} className="task-item-in-progress-image"></img>
+              <img
+                src={taskIcon2}
+                className="task-item-in-progress-image"
+              ></img>
             </div>
             <div className="task-item-in-progress">
-              <img src={taskIcon3} className="task-item-in-progress-image"></img>
+              <img
+                src={taskIcon3}
+                className="task-item-in-progress-image"
+              ></img>
             </div>
           </div>
         </div>
@@ -202,14 +223,14 @@ const Home = () => {
             </div>
           </div>
         </div>
-          </div>
+      </div>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         style={customStyles}
-        contentLabel="Task Modal" 
+        contentLabel="Task Modal"
       >
-        <TaskComponent task={modalItem} closeModal={closeModal}/>
+        <TaskComponent task={modalItem} closeModal={closeModal} />
       </Modal>
     </div>
   );
