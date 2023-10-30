@@ -17,6 +17,9 @@ import banner from "../../assets/bannerImage.jpg";
 import childrenBanner from "../../assets/childBannerImage.png";
 import rectangle from "../../assets/rectangle.png";
 import dashboardIcon from "../../assets/dashboardIcon.svg";
+import RewardComponent from "../../components/RewardComponent";
+
+Modal.setAppElement("#root");
 
 // dummy data
 const goals = [
@@ -71,6 +74,36 @@ const tasks = [
     completed: false,
   },
 ];
+
+const rewards = [
+  {
+    name: "xbox",
+    price: 799.99,
+    description: "a well respected game console for entertainment",
+    points: 5000,
+    url: "https://www.xbox.com/en-US/consoles/xbox-series-x",
+    approved: true,
+    earned: false
+  },
+  {
+    name: "ps5",
+    price: 999.99,
+    description: "a less respected game console for entertainment",
+    points: 7000,
+    url: "https://www.playstation.com/en-us/ps5/",
+    approved: false,
+    earned: false
+  },
+  {
+    name: "nintendo switch",
+    price: 299.99,
+    description: "a game console for entertainment",
+    points: 3000,
+    url: "https://www.nintendo.com/switch/",
+    approved: true,
+    earned: false
+  }
+];
 // task icons array
 const taskIcons = [taskIcon1, taskIcon2, taskIcon3];
 // modal sytles
@@ -83,6 +116,7 @@ const customStyles = {
 };
 
 const Home = () => {
+  const [isTask, setIsTask] = useState(false);
   const navigate = useNavigate();
   // modal state
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -179,6 +213,7 @@ const Home = () => {
                   src={taskIcons[index]}
                   className="task-item-image"
                   onClick={() => {
+                    setIsTask(true);
                     setItem(task);
                     openModal();
                   }}
@@ -210,13 +245,17 @@ const Home = () => {
       <div className="row-container">
         <div className="component">
           <h1 id="progress-title">Rewards</h1>
-          <a className="see-more-link-large">See More</a>
           <div className="task-in-progress-container">
-            {taskIcons.map((taskIcon, _index) => (
+            {rewards.map((reward, index) => (
               <div className="task-item-in-progress">
                 <img
-                  src={taskIcon}
+                  src={taskIcons[index]}
                   className="task-item-in-progress-image"
+                  onClick={() => {
+                    setIsTask(false);
+                    setItem(reward);
+                    openModal();
+                  }}
                 ></img>
               </div>
             ))}
@@ -247,7 +286,7 @@ const Home = () => {
         style={customStyles}
         contentLabel="Task Modal"
       >
-        <TaskComponent task={modalItem} closeModal={closeModal} />
+        {isTask ? <TaskComponent task={modalItem} closeModal={closeModal} /> : <RewardComponent reward={modalItem} closeModal={closeModal}/>}
       </Modal>
     </div>
   );
