@@ -3,9 +3,10 @@ import { userService } from "../../services/firebase";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+// http://reactcommunity.org/react-modal/
 import Modal from "react-modal";
 import TaskComponent from "../../components/TaskComponent";
-
+// images and assets
 import kidFace2 from "../../assets/kidFace1.png";
 import kidFace3 from "../../assets/kidFace2.png";
 import kidFace4 from "../../assets/kidFace3.png";
@@ -17,19 +18,49 @@ import childrenBanner from "../../assets/childBannerImage.png";
 import rectangle from "../../assets/rectangle.png";
 import dashboardIcon from "../../assets/dashboardIcon.svg";
 
+// dummy data
+const goals = [
+  {
+    title: "Learn to code",
+    description: "Six figure salary here I come!",
+    tasks: [
+      {
+        title: "take Intro to CS",
+        description: "Learn the basics of programming",
+        dueDate: "10/22/2023",
+        points: 100,
+        completed: false,
+      },
+    ],
+  },
+  {
+    title: "Get swole",
+    description: "Make Arnold proud",
+    tasks: [
+      {
+        title: "First workout",
+        description: "Do 10 pushups",
+        dueDate: "10/22/2023",
+        points: 10,
+        completed: false,
+      },
+    ],
+  },
+];
+
 const tasks = [
   {
-    title: "Task 1",
-    description: "Description",
+    title: "Clean room",
+    description: "Make bed, put away toys, and vacuum",
     dueDate: "10/22/2023",
-    points: 10,
+    points: 30,
     completed: false,
   },
   {
-    title: "Task 2",
-    description: "Description",
+    title: "Take a walk",
+    description: "Take a walk around the block",
     dueDate: "10/22/2023",
-    points: 10,
+    points: 20,
     completed: false,
   },
   {
@@ -40,9 +71,9 @@ const tasks = [
     completed: false,
   },
 ];
-
+// task icons array
 const taskIcons = [taskIcon1, taskIcon2, taskIcon3];
-
+// modal sytles
 const customStyles = {
   content: {
     width: "20%",
@@ -83,6 +114,8 @@ const Home = () => {
     }
   };
 
+  const today = new Date();
+
   return (
     <div className="main-content">
       <div className="search-bar">
@@ -101,7 +134,7 @@ const Home = () => {
         <div className="btn-column-container">
           <Link to="/home">Home</Link>
           <Link to="/home">Calendar</Link>
-          <Link to="/playground">Tasks</Link>
+          <Link to="/task">Tasks</Link>
           <Link to="/home">Information</Link>
         </div>
         <div className="component">
@@ -125,7 +158,7 @@ const Home = () => {
           <div className="welcome-container">
             <img src={banner} className="banner-background"></img>
             <div className="introduction">
-              <p className="date">October 22, 2023</p>
+              <span className="date">{today.toDateString()}</span>
               <h3 className="welcome-title">
                 Welcome Back, Child1!
                 <p className="subtitle">Getting tasks done!</p>
@@ -138,12 +171,8 @@ const Home = () => {
 
       <div className="row-container">
         <div className="component">
-          <h1>Tasks</h1>            
-          <Link to="/task" className="add-task-button">
-              Add Task
-            </Link>
+          <h1>Tasks</h1>
           <div className="task-list-container">
-
             {tasks.map((task, index) => (
               <div key={index} className="task-item">
                 <img
@@ -172,7 +201,7 @@ const Home = () => {
             </div>
             <div className="guardian-item">
               <img src={kidFace4} className="guardian-image"></img>
-              <h4>Guardian 3</h4>
+              <h4>Uncle Bob</h4>
             </div>
           </div>
         </div>
@@ -180,46 +209,34 @@ const Home = () => {
 
       <div className="row-container">
         <div className="component">
-          <h1 id="progress-title">In Progress Tasks</h1>
+          <h1 id="progress-title">Rewards</h1>
           <a className="see-more-link-large">See More</a>
           <div className="task-in-progress-container">
-            <div className="task-item-in-progress">
-              <img
-                src={taskIcon1}
-                className="task-item-in-progress-image"
-              ></img>
-            </div>
-            <div className="task-item-in-progress">
-              <img
-                src={taskIcon2}
-                className="task-item-in-progress-image"
-              ></img>
-            </div>
-            <div className="task-item-in-progress">
-              <img
-                src={taskIcon3}
-                className="task-item-in-progress-image"
-              ></img>
-            </div>
+            {taskIcons.map((taskIcon, _index) => (
+              <div className="task-item-in-progress">
+                <img
+                  src={taskIcon}
+                  className="task-item-in-progress-image"
+                ></img>
+              </div>
+            ))}
           </div>
         </div>
 
         <div className="component">
           <div className="parent-container">
-            <h1>Upcoming Tasks</h1>
+            <h1>Goals</h1>
             <div className="upcoming-tasks-container">
-              <div className="upcoming-task-item">
-                Upcoming Task 1
-                <div className="upcoming-task-title">Fold Clothes</div>
-                <div className="upcoming-task-description">Description</div>
-                <a className="see-more-link">See More</a>
-              </div>
-              <div className="upcoming-task-item">
-                Upcoming Task 2
-                <div className="upcoming-task-title">Take Trash Out</div>
-                <div className="upcoming-task-description">Description</div>
-                <a className="see-more-link">See More</a>
-              </div>
+              {goals.map((goal, index) => (
+                <div className="upcoming-task-item">
+                  Goal: {index + 1}
+                  <div className="upcoming-task-title">{goal.title}</div>
+                  <div className="upcoming-task-description">
+                    {goal.description}
+                  </div>
+                  <a className="see-more-link">See Tasks for this goal</a>
+                </div>
+              ))}
             </div>
           </div>
         </div>

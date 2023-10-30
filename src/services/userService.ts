@@ -6,7 +6,7 @@ import {
 } from "firebase/auth";
 import { setDoc, doc, Firestore } from "firebase/firestore";
 import { logError } from "./utils";
-import { UserData, Role, Goal, Reward, Task, AppUser } from "./types";
+import { UserData, Role, Goal, Reward, Task, AppUser } from "../types";
 
 /**
  * This class is responsible for all user related firebase services

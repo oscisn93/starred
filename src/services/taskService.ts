@@ -10,7 +10,7 @@ import {
   where,
   getDocs,
 } from "firebase/firestore";
-import { Task, TaskData } from "./types";
+import { Task, TaskData } from "../types";
 import { Auth } from "firebase/auth";
 import { logError } from "./utils";
 /**
