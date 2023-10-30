@@ -12,7 +12,7 @@ import {
   where,
 } from "firebase/firestore";
 import { logError } from "./utils";
-import { GoalData, Goal } from "./types";
+import { GoalData, Goal } from "../types";
 import { Auth } from "firebase/auth";
 import { Firestore } from "firebase/firestore";
 

@@ -2,16 +2,21 @@ import "./App.css";
 import Login from "./pages/Login";
 import Home from "./pages/home-page";
 import Register from "./pages/Register";
-import Protected from "./components/protected";
+import Protected from "./components/Protected";
 import Landing from "./pages/Landing";
+import TaskCreate from "./pages/TaskCreate";
 import { Routes, Route } from "react-router-dom";
-/** playground is used for testing new components */
-import Playground from "./pages/playground";
+
+function NotFound() {
+  // https://ui.dev/react-router-handling-404-pages
+  return <h1>404 Not Found</h1>;
+}
 
 function App() {
   return (
     <div>
       <Routes>
+        <Route path="*" element={<NotFound />} />
         <Route path="/" element={<Landing />} />
         <Route
           path="/home"
@@ -22,10 +27,10 @@ function App() {
           }
         />
         <Route
-          path="/playground"
+          path="/task"
           element={
             <Protected>
-              <Playground />
+              <TaskCreate />
             </Protected>
           }
         />
