@@ -1,9 +1,6 @@
 // @ts-nocheck
 import { useReducer } from "react";
-import {
-  auth,
-  taskService,
-} from "../services/firebase";
+import { auth, taskService } from "../services/firebase";
 import { Timestamp } from "firebase/firestore";
 
 function reducer(state, action) {
@@ -67,15 +64,6 @@ export default function TaskCreate() {
   return (
     <main>
       <h1>Task Form</h1>
-      <section>
-        <h2>{state.title}</h2>
-        <p>{state.description}</p>
-        <aside>
-          <p>Due Date: {state.dueDate}</p>
-          <p>Points: {state.points}</p>
-          <p>Completed: {state.completed ? "Complete" : "Incomplete"}</p>
-        </aside>
-      </section>
       <form>
         <div>
           <label htmlFor="title">Title</label>
