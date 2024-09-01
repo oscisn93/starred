@@ -1,9 +1,8 @@
+"use client";
+
 import "./index.css";
 import { userService } from "../../services/firebase";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { useState } from "react";
-// http://reactcommunity.org/react-modal/
 import Modal from "react-modal";
 import TaskComponent from "../../components/TaskComponent";
 // images and assets

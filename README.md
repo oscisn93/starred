@@ -1,110 +1,36 @@
-# Starred
-
-Starred is a behavior-tracking and rewards application that's designed to encourage positive behavioral changes, particularly in younger children. This project is built using React.
-
-## Table of Contents
-
-<!--ts-->
-1. [Getting Started](#getting-started)
-2. [Installation and Configuration](#installation-and-configuration)
-3. [Navigation](#navigation)
-   1. [Landing Page](#1-landing-page)
-   2. [Login Page/Register Page](#2-login-pageregister-page)
-   3. [Home Page](#3-home-page)
-      1. [Search Bar](#31-search-bar)
-      2. [Profile/User](#32-profileuser)
-      3. [Tasks](#33-tasks)
-   4. [Dashboard Tab](#4-dashboard-tab)
-<!--te-->
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
-Before you begin, make sure you have [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed on your machine.
+First, run the development server:
 
-## Installation and Configuration
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-1. Clone the repository:
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-   ```bash
-   git clone https://github.com/oscisn93/starred.git
-   ```
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-2. Navigate to the project directory:
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-   ```bash
-   cd starred
-   ```
+## Learn More
 
-3. Install project dependencies:
+To learn more about Next.js, take a look at the following resources:
 
-   ```bash
-   npm install
-   ```
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-4. Build the project:
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-   ```bash
-   npm run dev
-   ```
+## Deploy on Vercel
 
-## Navigation
-Here's how you can navigate through the Starred app:
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-### 1. Landing Page
-When you launch the app, the landing page will greet you with two prominent options: 'Log In' or 'Register.' To access your existing account, click the 'Login' button. If you're new to our platform, click 'Register' to create an account.
-![image](https://github.com/oscisn93/starred/assets/55215498/05b37c95-3d3d-425e-bf0d-97a09792462a)
-
-### 2. Login Page/Register Page
-
-If you've selected the 'Login' button, you'll be directed to our login page. Please enter your account email and password, and then click the 'Login' button.
-![image](https://github.com/oscisn93/starred/assets/55215498/584818e6-8633-4449-af7a-945d78f5b18e)
-
-If you've selected the 'Register' button, you'll be redirected to our registration page. Please provide your account email, password, and password confirmation, and then click the 'Register' button.
-
-### 3. Home Page
-
-After selecting either the login or register button, you will be redirected to our home page.
-![image](https://github.com/oscisn93/starred/assets/55215498/db2ffc6c-b650-4b2b-9a03-679e9c5fa7ef)
-
-### 3.1 Search Bar
-
-At the top of the home page, you'll find a search bar that searches for existing tasks throughout the application.
-![Screenshot 2023-10-28 150618](https://github.com/oscisn93/starred/assets/55215498/1d602270-b105-4f99-83ad-cfd266433c0f)
-
-### 3.2 Profile/User
-
-At the top right of the home page, you'll find your profile.
-![Screenshot 2023-10-28 150618](https://github.com/oscisn93/starred/assets/55215498/2b2516c1-1456-4df6-9731-a5ff484316e8)
-
-On the right side of the screen, just under the banner, you'll be able to see the guardians or parents who are contributing to your profile.
-![Screenshot 2023-10-28 150618](https://github.com/oscisn93/starred/assets/55215498/42a352b9-60bf-4e65-a0b4-27e7a1bb37c7)
-
-### 3.3 Tasks
-In the middle of the screen, you'll find the task section, which features three distinct categories for your tasks.
-![Screenshot 2023-10-28 150618](https://github.com/oscisn93/starred/assets/55215498/ddd4ca8e-1ea8-49d6-831a-b8b5f56d70e3)
-
-Beneath that, on the bottom right, you can access your in-progress tasks.
-![Screenshot 2023-10-28 150618](https://github.com/oscisn93/starred/assets/55215498/fc597031-94d3-44b3-9081-ee1846e7d832)
-
-At the bottom right, you'll be able to view your upcoming tasks.
-![Screenshot 2023-10-28 150618](https://github.com/oscisn93/starred/assets/55215498/82f584be-7441-48a5-a1c1-fc8832da9615)
-
-### 4. Dashboard Tab
-
-On the left side of the screen, you'll find our dashboard, where you can navigate to the Home, Calendar, Task, and Information tabs. The Home tab will take you back to our home page, while the Calendar tab will direct you to our calendar, where you can view task dates. If you wish to log out, simply click the 'Log Out' button located at the bottom.
-![Screenshot 2023-10-28 150618](https://github.com/oscisn93/starred/assets/55215498/be5cbfa8-68ad-4086-ab56-12ac5a725399)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
