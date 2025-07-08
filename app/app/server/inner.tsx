@@ -20,7 +20,9 @@ export default function Home({
       </div>
       <button
         className="bg-foreground text-background px-4 py-2 rounded-md mx-auto"
-        onClick={() => { console.error("dont forget to fix this!")}}
+        onClick={() => {
+          console.error("dont forget to fix this!");
+        }}
       >
         Add a random number
       </button>

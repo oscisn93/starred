@@ -4,6 +4,7 @@ import { authTables } from "@convex-dev/auth/server";
 
 export default defineSchema({
   ...authTables,
+  // override the default convex users table
   users: defineTable({
     name: v.optional(v.string()),
     image: v.optional(v.string()),
@@ -15,36 +16,49 @@ export default defineSchema({
   })
     .index("by_email", ["email"])
     .index("by_phone", ["phone"]),
+  // groups are groupings of admins and participants
   groups: defineTable({
+    // name can describe group.
+    // Example: family-chores, football-team, church-choir, etc...
     name: v.string(),
-    admin: v.id("users")
-  })
-    .index("by_admin", ["admin"]),
+    // One user must be responsible for creating and verifying
+    // completion of tasks. They are the admin.
+    adminId: v.id("users"),
+  }).index("by_admin", ["adminId"]),
+  // participants are the users who are
+  // given rewards for completing tasks
   participants: defineTable({
-    user: v.id("users"),
-    group: v.id("groups"),
+    userId: v.id("users"),
+    groupId: v.id("groups"),
     points: v.number(),
-  }),
+  })
+    .index("by_group_user", ["groupId", "userId"]),
+  // a tasks is designated for a group
+  // it is created by admins
   tasks: defineTable({
-    group: v.id("groups"),
-    participant: v.id("users"),
+    groupId: v.id("groups"),
     title: v.string(),
     description: v.optional(v.string()),
     points: v.number(),
-    dueDate: v.string(),
-    completed: v.boolean(),
+    dueDate: v.optional(v.number()),
   })
-    .index("by_participant", ["participant"])
-    .index("by_group", ["group"]),
-  ratings: defineTable({
-    task: v.id("tasks"),
+    .index("by_dueDate", ["dueDate"])
+    .index("by_group", ["groupId"]),
+  // feedback is a mechanism for interacting with tasks
+  contracts: defineTable({
+    taskId: v.id("tasks"),
+    participantId: v.id("users"),
+    markedComplete: v.boolean(),
     verified: v.boolean(),
     rating: v.number(),
-    feedback: v.optional(v.string()),
-  }),
+    text: v.optional(v.string()),
+  })
+    .index("by_participant", ["participantId"])
+    .index("by_participant_task", ["participantId", "taskId"])
+    .index("by_task", ["taskId"]),
   rewards: defineTable({
-    author: v.id("users"),
-    manager: v.id("users"),
+    authorId: v.id("users"),
+    groupId: v.id("groups"),
     name: v.string(),
     description: v.optional(v.string()),
     points: v.number(),

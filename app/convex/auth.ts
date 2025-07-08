@@ -7,7 +7,7 @@ import { z } from "zod";
 import { ConvexError, Value } from "convex/values";
 
 const ParamsSchema = z.object({
-  email: z.string().email()
+  email: z.string().email(),
 });
 
 export const { auth, signIn, signOut, store, isAuthenticated } = convexAuth({
@@ -16,7 +16,7 @@ export const { auth, signIn, signOut, store, isAuthenticated } = convexAuth({
       profile(params: Record<string, Value | undefined>) {
         const { error, data } = ParamsSchema.safeParse(params);
         if (error) {
-          throw new ConvexError(error.format())
+          throw new ConvexError(error.format());
         }
         return { email: data.email };
       },
@@ -31,8 +31,8 @@ export const { auth, signIn, signOut, store, isAuthenticated } = convexAuth({
         }
       },
       reset: ResendOTPPasswordReset,
-      verify: ResendOTP
+      verify: ResendOTP,
     }),
-    Github
+    Github,
   ],
 });
