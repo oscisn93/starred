@@ -22,7 +22,7 @@ export function LoginForm({
   const [email, setEmail] = useState<string>("m@example.com");
   const [password, setPassword] = useState<string>("");
   const { signIn } = useAuthActions();
-  const [step, setStep] = useState<"signUp" | "signIn" | { email: string }>(
+  const [step, setStep] = useState<"signUp" | "signIn">(
     "signIn",
   );
   return (
@@ -35,7 +35,6 @@ export function LoginForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          {step === "signIn" || "signUp" ? (
             <form
               onSubmit={(event) => {
                 event.preventDefault();
@@ -111,27 +110,6 @@ export function LoginForm({
                 </a>
               </div>
             </form>
-          ) : (
-            <form
-              onSubmit={(event) => {
-                event.preventDefault();
-                const formData = new FormData(event.currentTarget);
-                void signIn("password", formData);
-              }}
-            >
-              <input type="text" name="code" placeholder="Code" />
-              <input type="hidden" name="flow" value="email-verification" />
-              <input type="hidden" name="email" value={step.email} />
-              <Button type="submit">Continue</Button>
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => setStep("signIn")}
-              >
-                Cancel
-              </Button>
-            </form>
-          )}
         </CardContent>
       </Card>
     </div>

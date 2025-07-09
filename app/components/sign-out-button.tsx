@@ -2,7 +2,7 @@
 
 import { useAuthActions } from "@convex-dev/auth/react";
 import { useConvexAuth } from "convex/react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function SignOutButton() {
   const { isAuthenticated } = useConvexAuth();

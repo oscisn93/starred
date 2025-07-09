@@ -1,12 +1,10 @@
 import { ConvexError, v } from "convex/values";
-import {
-  query
-} from "../_generated/server";
+import { query } from "../_generated/server";
 import { getAuthUserId } from "@convex-dev/auth/server";
 
-export const getParticipantTask = query({
+export const getMemberTask = query({
   args: {
-    taskId: v.id("tasks")
+    taskId: v.id("tasks"),
   },
   handler: async (ctx, args) => {
     const userId = await getAuthUserId(ctx);
@@ -16,10 +14,10 @@ export const getParticipantTask = query({
 
     const contract = await ctx.db
       .query("contracts")
-      .withIndex("by_participant_task", q =>
-        q.eq("participantId", userId)
-          .eq("taskId", args.taskId)
-      ).unique();
+      .withIndex("by_member_task", (q) =>
+        q.eq("memberId", userId).eq("taskId", args.taskId),
+      )
+      .unique();
 
     if (!contract) {
       throw new ConvexError("Task not assigned to user");
@@ -37,22 +35,24 @@ export const getParticipantTask = query({
         title: task.title,
         description: task.description,
         points: task.points,
-        contract: contract ? {
-          id: contract._id,
-          markedComplete: contract.markedComplete,
-          verified: contract.verified,
-          rating: contract.rating,
-          feedback: contract.feedback
-        } : contract,
-        dueDate: task.dueDate
-      }
+        contract: contract
+          ? {
+            id: contract._id,
+            markedComplete: contract.markedComplete,
+            verified: contract.verified,
+            rating: contract.rating,
+            feedback: contract.feedback,
+          }
+          : contract,
+        deadline: task.deadline,
+      },
     };
-  }
+  },
 });
 
-export const getAdminTask = query({
+export const getTask = query({
   args: {
-    taskId: v.id("tasks")
+    taskId: v.id("tasks"),
   },
   handler: async (ctx, args) => {
     const userId = await getAuthUserId(ctx);
@@ -62,7 +62,7 @@ export const getAdminTask = query({
 
     const group = await ctx.db
       .query("groups")
-      .withIndex("by_admin", q => q.eq("adminId", userId))
+      .withIndex("by_admin", (q) => q.eq("adminId", userId))
       .unique();
     if (!group) {
       throw new ConvexError("User must be an admin");
@@ -73,56 +73,49 @@ export const getAdminTask = query({
       throw new ConvexError("Task not found");
     }
     if (task.groupId !== group._id) {
-      throw new ConvexError("Must be group admin for groupId")
+      throw new ConvexError("Must be group admin for groupId");
     }
 
     const contracts = await ctx.db
       .query("contracts")
-      .withIndex("by_task", q => q.eq("taskId", args.taskId))
+      .withIndex("by_task", (q) => q.eq("taskId", args.taskId))
       .collect();
 
     return {
       task,
-      contracts
-    }
-  }
-})
-
-export const listPartcipantTasks = query({
-  args: {
-    count: v.number(),
-    cursor: v.optional(v.string())
+      contracts,
+    };
   },
-  handler: async (ctx, args) => {
+});
+
+export const getMemberTasks = query({
+  handler: async (ctx) => {
     const userId = await getAuthUserId(ctx);
     if (!userId) {
       throw new ConvexError("No user session found.");
     }
     const result = await ctx.db
       .query("contracts")
-      .withIndex("by_participant_task", (q) =>
-        q.eq("participantId", userId)
-      )
-      .paginate({
-        numItems: args.count,
-        cursor: args.cursor || null
-      });
-    const taskList = result.page.map(async contract => {
+      .withIndex("by_member", (q) => q.eq("memberId", userId))
+      .collect();
+    const taskList = await Promise.all(result.map(async (contract) => {
       const task = await ctx.db.get(contract.taskId);
-      return task!!;
-    });
+      if (task === null) {
+        throw new ConvexError("Task does not exist");
+      }
+      return task;
+    }));
     return {
       tasks: taskList,
-      cursor: result.continueCursor
     };
   },
 });
 
-export const listGroupTasks = query({
+export const getGroupTasks = query({
   args: {
     count: v.number(),
     cursor: v.optional(v.string()),
-    groupId: v.id("groups")
+    groupId: v.id("groups"),
   },
   handler: async (ctx, args) => {
     const userId = await getAuthUserId(ctx);
@@ -134,7 +127,7 @@ export const listGroupTasks = query({
     const group = await ctx.db.get(args.groupId);
     // group is potentially null
     if (!group) {
-      throw new ConvexError("Must have a valid groupId")
+      throw new ConvexError("Must have a valid groupId");
     }
     // User is unauthorized
     if (group.adminId !== userId) {
@@ -146,11 +139,11 @@ export const listGroupTasks = query({
       .withIndex("by_group", (q) => q.eq("groupId", args.groupId))
       .paginate({
         numItems: args.count,
-        cursor: args.cursor || null
+        cursor: args.cursor || null,
       });
     return {
       tasks: result.page,
-      cursor: result.continueCursor
-    }
-  }
+      cursor: result.continueCursor,
+    };
+  },
 });
