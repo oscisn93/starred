@@ -47,15 +47,17 @@ export default defineSchema({
   // feedback is a mechanism for interacting with tasks
   contracts: defineTable({
     taskId: v.id("tasks"),
+    groupId: v.id("groups"),
     participantId: v.id("users"),
     markedComplete: v.boolean(),
     verified: v.boolean(),
     rating: v.number(),
-    text: v.optional(v.string()),
+    feedback: v.optional(v.string()),
   })
     .index("by_participant", ["participantId"])
     .index("by_participant_task", ["participantId", "taskId"])
-    .index("by_task", ["taskId"]),
+    .index("by_task", ["taskId"])
+    .index("by_group", ["groupId"]),
   rewards: defineTable({
     authorId: v.id("users"),
     groupId: v.id("groups"),

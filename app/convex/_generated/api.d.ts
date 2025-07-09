@@ -17,7 +17,8 @@ import type * as ResendOTP from "../ResendOTP.js";
 import type * as ResendOTPPasswordReset from "../ResendOTPPasswordReset.js";
 import type * as auth from "../auth.js";
 import type * as http from "../http.js";
-import type * as tasks from "../tasks.js";
+import type * as tasks_mutations from "../tasks/mutations.js";
+import type * as tasks_queries from "../tasks/queries.js";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -32,7 +33,8 @@ declare const fullApi: ApiFromModules<{
   ResendOTPPasswordReset: typeof ResendOTPPasswordReset;
   auth: typeof auth;
   http: typeof http;
-  tasks: typeof tasks;
+  "tasks/mutations": typeof tasks_mutations;
+  "tasks/queries": typeof tasks_queries;
 }>;
 export declare const api: FilterApi<
   typeof fullApi,
