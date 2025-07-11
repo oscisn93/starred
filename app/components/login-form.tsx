@@ -19,7 +19,7 @@ export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const [email, setEmail] = useState<string>("m@example.com");
+  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const { signIn } = useAuthActions();
   const [step, setStep] = useState<"signUp" | "signIn">(
@@ -49,6 +49,7 @@ export function LoginForm({
                     type="email"
                     placeholder="m@example.com"
                     onChange={(event) => {
+                      console.log(email);
                       setEmail(event.target.value);
                     }}
                     required

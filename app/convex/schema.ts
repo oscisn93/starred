@@ -4,17 +4,11 @@ import { authTables } from "@convex-dev/auth/server";
 
 export default defineSchema({
   ...authTables,
-  // groups are groupings of admins and members
   groups: defineTable({
-    // name can describe group.
-    // Example: family-chores, football-team, church-choir, etc...
     name: v.string(),
-    // One user must be responsible for creating and verifying
-    // completion of tasks. They are the admin.
     adminId: v.id("users"),
-  }).index("by_admin", ["adminId"]),
-  // participants are the users who are
-  // given rewards for completing tasks
+  })
+    .index("by_admin", ["adminId"]),
   members: defineTable({
     userId: v.id("users"),
     groupId: v.id("groups"),
@@ -23,8 +17,6 @@ export default defineSchema({
     .index("by_user", ["userId"])
     .index("by_group", ["groupId"])
     .index("by_group_user", ["groupId", "userId"]),
-  // a tasks is designated for a group
-  // it is created by admins
   tasks: defineTable({
     groupId: v.id("groups"),
     title: v.string(),
@@ -34,7 +26,6 @@ export default defineSchema({
   })
     .index("by_group", ["groupId"])
     .index("by_deadline", ["deadline"]),
-  // feedback is a mechanism for interacting with tasks
   contracts: defineTable({
     taskId: v.id("tasks"),
     groupId: v.id("groups"),

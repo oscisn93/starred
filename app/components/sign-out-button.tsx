@@ -12,7 +12,7 @@ export default function SignOutButton() {
     <>
       {isAuthenticated && (
         <button
-          className="bg-slate-200 dark:bg-slate-800 text-foreground rounded-md px-2 py-1"
+          className="bg-slate-900 dark:bg-slate-200 border border-yellow-800 text-foreground rounded-md px-2 py-1"
           onClick={() =>
             void signOut().then(() => {
               router.push("/signin");

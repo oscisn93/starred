@@ -40,7 +40,7 @@ export const getMemberGroups = query({
       .query("members")
       .withIndex("by_user", (q) => q.eq("userId", userId))
       .collect();
-    const groups = memberships.map(async (p) => await ctx.db.get(p.groupId));
+    const groups = await Promise.all(memberships.map(async (p) => await ctx.db.get(p.groupId)));
     return {
       groups,
     };

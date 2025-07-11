@@ -2,10 +2,12 @@
 
 import { api } from "@/convex/_generated/api";
 import { useQuery } from "convex/react";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "./ui/button";
+import { Plus } from "lucide-react";
 
-export default async function TaskList() {
-  const [count, setCount] = useState<number>(10);
+export default function TaskList() {
+  const router = useRouter()
   const data = useQuery(api.tasks.queries.getMemberTasks);
   if (data === undefined) {
     return (
@@ -24,6 +26,14 @@ export default async function TaskList() {
           </aside>
         </div>
       )): "User has no assigned tasks"}
+      <section>
+        <Button onClick={()=> router.push("/tasks/suggest")}>
+          Suggest New Task
+        </Button>
+        <Button>
+          Add New Task <Plus />
+        </Button>
+      </section>
     </div>
   );
 }

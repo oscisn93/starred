@@ -1,17 +1,27 @@
 import SignOutButton from "@/components/sign-out-button";
-import UserProfile from "@/components/user-profile";
+import Groups from "@/components/groups";
+import TaskList from "@/components/task-list";
+import { Star } from "lucide-react";
 
 export default function Home() {
   return (
     <>
-      <header className="sticky top-0 z-10 bg-background p-4 border-b-2 border-slate-200 dark:border-slate-800 flex flex-row justify-between items-center">
-        Dashboard | {} 
-        <SignOutButton />
+      <header className="sticky top-0 z-10 border-b-2 border-b-yellow-800 flex flex-row justify-between items-center bg-zinc-900 p-2 items-center">
+        <span className="flex items-center justify-between w-full text-yellow-600">
+          <span className="flex w-1/3 px-2">
+            <Star className="mr-2"/>Starred | Dashboard</span>
+          <SignOutButton />
+        </span>
       </header>
-      <main className="p-8 flex flex-col gap-8">
-        <h1 className="text-4xl font-bold text-center">
-          <UserProfile />          
-        </h1>
+      <main className="flex gap-2 p-2 bg-slate-950 h-dvh text-slate-100 font-semibold">
+        <section className="w-1/2 h-fit bg-orange-800 rounded p-2 flex flex-col gap-2">
+          <h3>Groups</h3>
+          <Groups />
+        </section>
+        <section className="w-1/2 h-fit bg-green-600 rounded p-2 flex flex-col gap-2">
+          <h3>Tasks</h3>
+          <TaskList />
+        </section>
       </main>
     </>
   );
