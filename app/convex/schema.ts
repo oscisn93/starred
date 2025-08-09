@@ -42,14 +42,10 @@ export default defineSchema({
   rewards: defineTable({
     adminId: v.id("users"),
     groupId: v.id("groups"),
+    memberId: v.optional(v.id("members")),
     name: v.string(),
     description: v.optional(v.string()),
     points: v.number(),
     earned: v.boolean(),
-  }),
-  prizes: defineTable({
-    memberId: v.id("users"),
-    rewardId: v.id("rewards"),
   })
-    .index("by_member", ["memberId"]),
 });
